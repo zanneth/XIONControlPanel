@@ -1,5 +1,5 @@
 //
-//  HorizontalBlur.fsh
+//  {Horizontal,Vertical}Blur.fsh
 //  XIONControlPanel
 //
 //  Created by Charles Magahern on 12/29/15.
