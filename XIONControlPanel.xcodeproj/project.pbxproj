@@ -7,21 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0C3CAEA81C3350C800B856AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAEA71C3350C800B856AD /* AppDelegate.swift */; };
-		0C3CAEAA1C3350C800B856AD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3CAEA91C3350C800B856AD /* ViewController.swift */; };
-		0C3CAEAD1C3350C800B856AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEAB1C3350C800B856AD /* Main.storyboard */; };
+		0C20E2B91C33514100BA789B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2B51C33514100BA789B /* AppDelegate.swift */; };
+		0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2BA1C33529700BA789B /* MainViewController.swift */; };
+		0C20E2BD1C33534F00BA789B /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2BC1C33534F00BA789B /* BackgroundViewController.swift */; };
 		0C3CAEAF1C3350C800B856AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEAE1C3350C800B856AD /* Assets.xcassets */; };
 		0C3CAEB21C3350C800B856AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */; };
+		0C63A8731C337381007E4B52 /* CubletsTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8721C337381007E4B52 /* CubletsTechnique.plist */; };
+		0C63A8761C3373D1007E4B52 /* HorizontalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */; };
+		0C63A8781C3373D9007E4B52 /* HorizontalBlur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */; };
+		0C63A87D1C33C655007E4B52 /* NSValue+XIONAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C63A87C1C33C655007E4B52 /* NSValue+XIONAdditions.m */; };
+		0C63A87F1C33D3D7007E4B52 /* FirstPass.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A87E1C33D3D7007E4B52 /* FirstPass.vsh */; };
+		0C63A8811C33D3DE007E4B52 /* FirstPass.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8801C33D3DE007E4B52 /* FirstPass.fsh */; };
+		0C63A8841C33DC29007E4B52 /* VerticalBlur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8821C33DC29007E4B52 /* VerticalBlur.fsh */; };
+		0C63A8851C33DC29007E4B52 /* VerticalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */; };
+		0C63A8881C33EB3B007E4B52 /* FinalRender.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */; };
+		0C63A8891C33EB3B007E4B52 /* FinalRender.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C20E2B51C33514100BA789B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0C20E2BA1C33529700BA789B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		0C20E2BC1C33534F00BA789B /* BackgroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		0C3CAEA41C3350C800B856AD /* XIONControlPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XIONControlPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C3CAEA71C3350C800B856AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0C3CAEA91C3350C800B856AD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0C3CAEAC1C3350C800B856AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0C3CAEAE1C3350C800B856AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C3CAEB11C3350C800B856AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C3CAEB31C3350C800B856AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0C63A8721C337381007E4B52 /* CubletsTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CubletsTechnique.plist; sourceTree = "<group>"; };
+		0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.vsh; sourceTree = "<group>"; };
+		0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.fsh; sourceTree = "<group>"; };
+		0C63A87A1C33C655007E4B52 /* XIONControlPanel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XIONControlPanel-Bridging-Header.h"; sourceTree = "<group>"; };
+		0C63A87B1C33C655007E4B52 /* NSValue+XIONAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+XIONAdditions.h"; sourceTree = "<group>"; };
+		0C63A87C1C33C655007E4B52 /* NSValue+XIONAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+XIONAdditions.m"; sourceTree = "<group>"; };
+		0C63A87E1C33D3D7007E4B52 /* FirstPass.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FirstPass.vsh; sourceTree = "<group>"; };
+		0C63A8801C33D3DE007E4B52 /* FirstPass.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FirstPass.fsh; sourceTree = "<group>"; };
+		0C63A8821C33DC29007E4B52 /* VerticalBlur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VerticalBlur.fsh; sourceTree = "<group>"; };
+		0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VerticalBlur.vsh; sourceTree = "<group>"; };
+		0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.fsh; sourceTree = "<group>"; };
+		0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +57,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C20E2B31C33510700BA789B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C3CAEAE1C3350C800B856AD /* Assets.xcassets */,
+				0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */,
+				0C3CAEB31C3350C800B856AD /* Info.plist */,
+			);
+			name = "Supporting Files";
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		0C20E2B41C33514100BA789B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0C20E2B51C33514100BA789B /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0C20E2B61C33514100BA789B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0C20E2BC1C33534F00BA789B /* BackgroundViewController.swift */,
+				0C20E2BA1C33529700BA789B /* MainViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0C20E2B71C33514100BA789B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0C20E2B81C33514100BA789B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0C20E2C81C336F2E00BA789B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C63A8721C337381007E4B52 /* CubletsTechnique.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		0C3CAE9B1C3350C800B856AD = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +126,41 @@
 		0C3CAEA61C3350C800B856AD /* XIONControlPanel */ = {
 			isa = PBXGroup;
 			children = (
-				0C3CAEA71C3350C800B856AD /* AppDelegate.swift */,
-				0C3CAEA91C3350C800B856AD /* ViewController.swift */,
-				0C3CAEAB1C3350C800B856AD /* Main.storyboard */,
-				0C3CAEAE1C3350C800B856AD /* Assets.xcassets */,
-				0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */,
-				0C3CAEB31C3350C800B856AD /* Info.plist */,
+				0C20E2B41C33514100BA789B /* Application */,
+				0C20E2B61C33514100BA789B /* Controllers */,
+				0C20E2B71C33514100BA789B /* Models */,
+				0C63A8741C3373BC007E4B52 /* Shaders */,
+				0C20E2C81C336F2E00BA789B /* Resources */,
+				0C63A8791C33C622007E4B52 /* Utilities */,
+				0C20E2B81C33514100BA789B /* Views */,
+				0C20E2B31C33510700BA789B /* Supporting Files */,
 			);
 			path = XIONControlPanel;
+			sourceTree = "<group>";
+		};
+		0C63A8741C3373BC007E4B52 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0C63A87E1C33D3D7007E4B52 /* FirstPass.vsh */,
+				0C63A8801C33D3DE007E4B52 /* FirstPass.fsh */,
+				0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */,
+				0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */,
+				0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */,
+				0C63A8821C33DC29007E4B52 /* VerticalBlur.fsh */,
+				0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */,
+				0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		0C63A8791C33C622007E4B52 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0C63A87B1C33C655007E4B52 /* NSValue+XIONAdditions.h */,
+				0C63A87C1C33C655007E4B52 /* NSValue+XIONAdditions.m */,
+				0C63A87A1C33C655007E4B52 /* XIONControlPanel-Bridging-Header.h */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,9 +221,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C63A8761C3373D1007E4B52 /* HorizontalBlur.vsh in Resources */,
+				0C63A87F1C33D3D7007E4B52 /* FirstPass.vsh in Resources */,
+				0C63A8731C337381007E4B52 /* CubletsTechnique.plist in Resources */,
+				0C63A8811C33D3DE007E4B52 /* FirstPass.fsh in Resources */,
+				0C63A8881C33EB3B007E4B52 /* FinalRender.fsh in Resources */,
 				0C3CAEB21C3350C800B856AD /* LaunchScreen.storyboard in Resources */,
 				0C3CAEAF1C3350C800B856AD /* Assets.xcassets in Resources */,
-				0C3CAEAD1C3350C800B856AD /* Main.storyboard in Resources */,
+				0C63A8841C33DC29007E4B52 /* VerticalBlur.fsh in Resources */,
+				0C63A8851C33DC29007E4B52 /* VerticalBlur.vsh in Resources */,
+				0C63A8891C33EB3B007E4B52 /* FinalRender.vsh in Resources */,
+				0C63A8781C3373D9007E4B52 /* HorizontalBlur.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,22 +242,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C3CAEAA1C3350C800B856AD /* ViewController.swift in Sources */,
-				0C3CAEA81C3350C800B856AD /* AppDelegate.swift in Sources */,
+				0C63A87D1C33C655007E4B52 /* NSValue+XIONAdditions.m in Sources */,
+				0C20E2BD1C33534F00BA789B /* BackgroundViewController.swift in Sources */,
+				0C20E2B91C33514100BA789B /* AppDelegate.swift in Sources */,
+				0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0C3CAEAB1C3350C800B856AD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0C3CAEAC1C3350C800B856AD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -249,10 +350,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = XIONControlPanel/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/Utilities/XIONControlPanel-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -260,10 +364,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = XIONControlPanel/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/Utilities/XIONControlPanel-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -286,6 +392,7 @@
 				0C3CAEB81C3350C800B856AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
