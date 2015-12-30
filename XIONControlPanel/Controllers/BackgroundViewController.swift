@@ -31,6 +31,7 @@ class BackgroundViewController: UIViewController {
         view.backgroundColor = UIColor.blackColor()
         view.scene = _scene
         view.allowsCameraControl = false
+        /* view.showsStatistics = true */
         
         _sceneView = view
         self.view = view

@@ -81,7 +81,7 @@
 				<key>u_blurmapSampler</key>
 				<string>bothblurs_color</string>
 				<key>u_colorSampler</key>
-				<string>firstPass_color</string>
+				<string>COLOR</string>
 			</dict>
 			<key>outputs</key>
 			<dict>
@@ -94,16 +94,22 @@
 	<dict>
 		<key>firstPass_color</key>
 		<dict>
+			<key>size</key>
+			<string>512x512</string>
 			<key>type</key>
 			<string>color</string>
 		</dict>
 		<key>hblur_color</key>
 		<dict>
+			<key>size</key>
+			<string>512x512</string>
 			<key>type</key>
 			<string>color</string>
 		</dict>
 		<key>bothblurs_color</key>
 		<dict>
+			<key>size</key>
+			<string>512x512</string>
 			<key>type</key>
 			<string>color</string>
 		</dict>
