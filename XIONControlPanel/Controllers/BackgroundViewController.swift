@@ -26,7 +26,8 @@ class BackgroundViewController: UIViewController {
     
     override func loadView()
     {
-        let view = SCNView(frame: UIScreen.mainScreen().bounds, options: nil)
+        let opts = [SCNPreferredRenderingAPIKey : SCNRenderingAPI.OpenGLES2.rawValue]
+        let view = SCNView(frame: UIScreen.mainScreen().bounds, options: opts)
         view.backgroundColor = UIColor.blackColor()
         view.scene = _scene
         view.allowsCameraControl = false
@@ -130,7 +131,7 @@ class BackgroundViewController: UIViewController {
     {
         let rotAxis = SCNVector3Make(0.25, 1.75, 1.0)
         let rotAngle = CGFloat(Float(2.0)*π)
-        let rotAction = SCNAction.repeatActionForever(SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 20.0))
+        let rotAction = SCNAction.repeatActionForever(SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 40.0))
         _cubletsNode.runAction(rotAction)
     }
     
