@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     private var _visualizationController:   VisualizationViewController = VisualizationViewController()
-    private var _machinesController:        ArcadeMachinesViewController = ArcadeMachinesViewController()
+    private var _switchesController:        SwitchesViewController = SwitchesViewController()
     private var _headerView:                HeaderView = HeaderView()
     
     // MARK: Overrides
@@ -24,8 +24,8 @@ class MainViewController: UIViewController {
         self.addChildViewController(_visualizationController)
         self.view.addSubview(_visualizationController.view)
         
-        self.addChildViewController(_machinesController)
-        self.view.addSubview(_machinesController.view)
+        self.addChildViewController(_switchesController)
+        self.view.addSubview(_switchesController.view)
         
         self.view.addSubview(_headerView)
     }
@@ -53,18 +53,18 @@ class MainViewController: UIViewController {
         let visualizationFrame = CGRect(
             x: bodyBounds.origin.x,
             y: bodyBounds.origin.y,
-            width: rint((5.0 / 8.0) * bodyBounds.size.width),
+            width: rint(0.6 * bodyBounds.size.width),
             height: bodyBounds.size.height
         )
         _visualizationController.view.frame = visualizationFrame
         
-        let machinesControllerFrame = CGRect(
+        let switchesControllerFrame = CGRect(
             x: CGRectGetMaxX(visualizationFrame),
             y: bodyBounds.origin.y,
             width: bodyBounds.size.width - visualizationFrame.size.width,
             height: bodyBounds.size.height
         )
-        _machinesController.view.frame = machinesControllerFrame
+        _switchesController.view.frame = switchesControllerFrame
     }
     
     override func viewDidAppear(animated: Bool)

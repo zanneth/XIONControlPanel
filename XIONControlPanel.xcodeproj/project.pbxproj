@@ -12,12 +12,14 @@
 		0C20E2BD1C33534F00BA789B /* VisualizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */; };
 		0C3CAEAF1C3350C800B856AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEAE1C3350C800B856AD /* Assets.xcassets */; };
 		0C3CAEB21C3350C800B856AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */; };
-		0C41EF4A1C34B51500AF847F /* ArcadeMachinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF491C34B51500AF847F /* ArcadeMachinesViewController.swift */; };
+		0C41EF4A1C34B51500AF847F /* SwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF491C34B51500AF847F /* SwitchesViewController.swift */; };
 		0C41EF4E1C34B81F00AF847F /* KSIRingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF4D1C34B81F00AF847F /* KSIRingView.m */; };
 		0C41EF501C34B97700AF847F /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF4F1C34B97700AF847F /* HeaderView.swift */; };
 		0C41EF521C34BA4E00AF847F /* Orbitron-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C41EF511C34BA4E00AF847F /* Orbitron-Medium.ttf */; };
 		0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF531C34BC9800AF847F /* XIONLogoView.swift */; };
 		0C41EF561C35ABCD00AF847F /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF551C35ABCD00AF847F /* ConnectionStatusView.swift */; };
+		0C4315001C35B1E700164559 /* WemoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4314FF1C35B1E700164559 /* WemoDevice.swift */; };
+		0C4315061C35E67600164559 /* WemoDeviceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4315051C35E67600164559 /* WemoDeviceCellView.swift */; };
 		0C63A8731C337381007E4B52 /* CubletsTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8721C337381007E4B52 /* CubletsTechnique.plist */; };
 		0C63A8761C3373D1007E4B52 /* HorizontalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */; };
 		0C63A8781C3373D9007E4B52 /* HorizontalBlur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */; };
@@ -28,6 +30,7 @@
 		0C63A8851C33DC29007E4B52 /* VerticalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */; };
 		0C63A8881C33EB3B007E4B52 /* FinalRender.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */; };
 		0C63A8891C33EB3B007E4B52 /* FinalRender.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */; };
+		0CF9A48E1C35E9C800276F13 /* SwitchIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,13 +41,15 @@
 		0C3CAEAE1C3350C800B856AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C3CAEB11C3350C800B856AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C3CAEB31C3350C800B856AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0C41EF491C34B51500AF847F /* ArcadeMachinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArcadeMachinesViewController.swift; sourceTree = "<group>"; };
+		0C41EF491C34B51500AF847F /* SwitchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchesViewController.swift; sourceTree = "<group>"; };
 		0C41EF4C1C34B81F00AF847F /* KSIRingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSIRingView.h; sourceTree = "<group>"; };
 		0C41EF4D1C34B81F00AF847F /* KSIRingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSIRingView.m; sourceTree = "<group>"; };
 		0C41EF4F1C34B97700AF847F /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0C41EF511C34BA4E00AF847F /* Orbitron-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Orbitron-Medium.ttf"; sourceTree = "<group>"; };
 		0C41EF531C34BC9800AF847F /* XIONLogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIONLogoView.swift; sourceTree = "<group>"; };
 		0C41EF551C35ABCD00AF847F /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
+		0C4314FF1C35B1E700164559 /* WemoDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoDevice.swift; sourceTree = "<group>"; };
+		0C4315051C35E67600164559 /* WemoDeviceCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoDeviceCellView.swift; sourceTree = "<group>"; };
 		0C63A8721C337381007E4B52 /* CubletsTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CubletsTechnique.plist; sourceTree = "<group>"; };
 		0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.vsh; sourceTree = "<group>"; };
 		0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.fsh; sourceTree = "<group>"; };
@@ -57,6 +62,7 @@
 		0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VerticalBlur.vsh; sourceTree = "<group>"; };
 		0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.fsh; sourceTree = "<group>"; };
 		0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.vsh; sourceTree = "<group>"; };
+		0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +99,7 @@
 		0C20E2B61C33514100BA789B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0C41EF491C34B51500AF847F /* ArcadeMachinesViewController.swift */,
+				0C41EF491C34B51500AF847F /* SwitchesViewController.swift */,
 				0C20E2BA1C33529700BA789B /* MainViewController.swift */,
 				0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */,
 			);
@@ -103,6 +109,7 @@
 		0C20E2B71C33514100BA789B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0C4314FF1C35B1E700164559 /* WemoDevice.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,7 +119,9 @@
 			children = (
 				0C41EF551C35ABCD00AF847F /* ConnectionStatusView.swift */,
 				0C41EF4F1C34B97700AF847F /* HeaderView.swift */,
+				0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */,
 				0C41EF531C34BC9800AF847F /* XIONLogoView.swift */,
+				0C4315051C35E67600164559 /* WemoDeviceCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -276,11 +285,14 @@
 				0C41EF561C35ABCD00AF847F /* ConnectionStatusView.swift in Sources */,
 				0C63A87D1C33C655007E4B52 /* NSValue+XIONAdditions.m in Sources */,
 				0C20E2BD1C33534F00BA789B /* VisualizationViewController.swift in Sources */,
-				0C41EF4A1C34B51500AF847F /* ArcadeMachinesViewController.swift in Sources */,
+				0C41EF4A1C34B51500AF847F /* SwitchesViewController.swift in Sources */,
 				0C20E2B91C33514100BA789B /* AppDelegate.swift in Sources */,
 				0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */,
 				0C41EF501C34B97700AF847F /* HeaderView.swift in Sources */,
 				0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */,
+				0C4315061C35E67600164559 /* WemoDeviceCellView.swift in Sources */,
+				0CF9A48E1C35E9C800276F13 /* SwitchIndicatorView.swift in Sources */,
+				0C4315001C35B1E700164559 /* WemoDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
