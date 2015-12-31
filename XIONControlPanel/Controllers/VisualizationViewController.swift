@@ -1,5 +1,5 @@
 //
-//  BackgroundViewController.swift
+//  VisualizationViewController.swift
 //  XIONControlPanel
 //
 //  Created by Charles Magahern on 12/29/15.
@@ -12,9 +12,9 @@ import GLKit
 import SceneKit
 import UIKit
 
-let π = Float(M_PI)
+let π = CGFloat(M_PI)
 
-class BackgroundViewController: UIViewController {
+class VisualizationViewController: UIViewController {
     private var _scene:         SCNScene = SCNScene()
     private var _sceneView:     SCNView?
     private var _cameraNode:    SCNNode = SCNNode()
@@ -34,7 +34,6 @@ class BackgroundViewController: UIViewController {
         view.backgroundColor = UIColor.blackColor()
         view.scene = _scene
         view.allowsCameraControl = false
-        view.showsStatistics = true
         
         _sceneView = view
         self.view = view
@@ -88,7 +87,7 @@ class BackgroundViewController: UIViewController {
             let ry = Float(arc4random()) / Float(UInt32.max)
             let rz = Float(arc4random()) / Float(UInt32.max)
             let rotAxis = SCNVector3Make(rx, ry, rz)
-            let rotCoeff = Float(arc4random() % 2 == 0 ? -1.0 : 1.0)
+            let rotCoeff = CGFloat(arc4random() % 2 == 0 ? -1.0 : 1.0)
             let rotAngle = CGFloat(rotCoeff * π / 4.0)
             
             let rotAction = SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 0.8)
@@ -108,7 +107,7 @@ class BackgroundViewController: UIViewController {
         let camera = SCNCamera()
         
         _cameraNode.camera = camera
-        _cameraNode.position = SCNVector3Make(0.0, 0.0, 50.0)
+        _cameraNode.position = SCNVector3Make(0.0, 0.0, 30.0)
         _scene.rootNode.addChildNode(_cameraNode)
         
         let centerNode = SCNNode()
@@ -136,10 +135,10 @@ class BackgroundViewController: UIViewController {
     {
         _cublets.removeAll()
         
-        let sz = Float(BackgroundViewController.cubletsSize)
-        let dim = BackgroundViewController.cubletsDimensions
+        let sz = Float(VisualizationViewController.cubletsSize)
+        let dim = VisualizationViewController.cubletsDimensions
         let dimf = Float(dim)
-        let spacing = Float(BackgroundViewController.cubletsSpacing)
+        let spacing = Float(VisualizationViewController.cubletsSpacing)
         let volume = (dimf * sz) + ((dimf - 1.0) * spacing)
         let orig = -volume / 2.0
         
@@ -177,7 +176,7 @@ class BackgroundViewController: UIViewController {
     internal func _setupAnimation()
     {
         let rotAxis = SCNVector3Make(0.25, 1.75, 1.0)
-        let rotAngle = CGFloat(Float(2.0) * π)
+        let rotAngle = 2.0 * π
         let rotAction = SCNAction.repeatActionForever(SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 40.0))
         _cubletsNode.runAction(rotAction)
     }

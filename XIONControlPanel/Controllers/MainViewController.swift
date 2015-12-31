@@ -9,7 +9,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    private var _backgroundController: BackgroundViewController = BackgroundViewController()
+    private var _visualizationController:   VisualizationViewController = VisualizationViewController()
+    private var _machinesController:        ArcadeMachinesViewController = ArcadeMachinesViewController()
+    private var _headerView:                HeaderView = HeaderView()
     
     // MARK: Overrides
     
@@ -19,22 +21,13 @@ class MainViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.blackColor()
         
-        self.addChildViewController(_backgroundController)
-        self.view.addSubview(_backgroundController.view)
+        self.addChildViewController(_visualizationController)
+        self.view.addSubview(_visualizationController.view)
         
-        let doubleTapGR = UITapGestureRecognizer(target: self, action: Selector("_handleDoubleFingerTap:"))
-        doubleTapGR.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(doubleTapGR)
+        self.addChildViewController(_machinesController)
+        self.view.addSubview(_machinesController.view)
         
-        let singleTapGR = UITapGestureRecognizer(target: self, action: Selector("_handleSingleFingerTap:"))
-        singleTapGR.numberOfTouchesRequired = 1
-        singleTapGR.requireGestureRecognizerToFail(doubleTapGR)
-        self.view.addGestureRecognizer(singleTapGR)
-    }
-    
-    override func prefersStatusBarHidden() -> Bool
-    {
-        return true
+        self.view.addSubview(_headerView)
     }
     
     override func viewDidLayoutSubviews()
@@ -42,19 +35,50 @@ class MainViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         let bounds = self.view.bounds
-        _backgroundController.view.frame = bounds
+        let headerBounds = CGRect(
+            x: 0.0,
+            y: 0.0,
+            width: bounds.size.width,
+            height: rint(bounds.size.height / 10.0)
+        )
+        let bodyBounds = CGRect(
+            x: 0.0,
+            y: CGRectGetMaxY(headerBounds),
+            width: bounds.size.width,
+            height: bounds.size.height - headerBounds.size.height
+        )
+        
+        _headerView.frame = headerBounds
+        
+        let visualizationFrame = CGRect(
+            x: bodyBounds.origin.x,
+            y: bodyBounds.origin.y,
+            width: rint((5.0 / 8.0) * bodyBounds.size.width),
+            height: bodyBounds.size.height
+        )
+        _visualizationController.view.frame = visualizationFrame
+        
+        let machinesControllerFrame = CGRect(
+            x: CGRectGetMaxX(visualizationFrame),
+            y: bodyBounds.origin.y,
+            width: bodyBounds.size.width - visualizationFrame.size.width,
+            height: bodyBounds.size.height
+        )
+        _machinesController.view.frame = machinesControllerFrame
     }
     
-    // MARK: Internal
-    
-    internal func _handleSingleFingerTap(gestureRecognizer: UITapGestureRecognizer)
+    override func viewDidAppear(animated: Bool)
     {
-        let randomPercentage = Float(arc4random()) / Float(UInt32.max)
-        _backgroundController.setPercentActivated(randomPercentage, animated: true)
+        _headerView.beginAnimating()
     }
     
-    internal func _handleDoubleFingerTap(gestureRecognizer: UITapGestureRecognizer)
+    override func viewDidDisappear(animated: Bool)
     {
-        _backgroundController.setPercentActivated(0.0, animated: true)
+        _headerView.stopAnimating()
+    }
+    
+    override func prefersStatusBarHidden() -> Bool
+    {
+        return true
     }
 }

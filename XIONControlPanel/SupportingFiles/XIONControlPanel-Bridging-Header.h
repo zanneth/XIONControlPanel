@@ -3,3 +3,4 @@
 //
 
 #import "NSValue+XIONAdditions.h"
+#import "KSIRingView.h"
