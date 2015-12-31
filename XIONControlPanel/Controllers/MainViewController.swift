@@ -69,12 +69,12 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool)
     {
-        _headerView.beginAnimating()
+        _headerView.xionLogoView.beginAnimating()
     }
     
     override func viewDidDisappear(animated: Bool)
     {
-        _headerView.stopAnimating()
+        _headerView.xionLogoView.stopAnimating()
     }
     
     override func prefersStatusBarHidden() -> Bool

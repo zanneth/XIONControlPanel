@@ -11,7 +11,9 @@ import Foundation
 import UIKit
 
 class HeaderView: UIView {
-    private var _xionLogoView:      XIONLogoView = XIONLogoView()
+    var xionLogoView:               XIONLogoView = XIONLogoView()
+    var connectionStatusView:       ConnectionStatusView = ConnectionStatusView()
+    
     private var _xionTitleLabel:    UILabel = UILabel()
     private var _xionJapaneseLabel: UILabel = UILabel()
     
@@ -20,7 +22,7 @@ class HeaderView: UIView {
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.blackColor()
-        self.addSubview(_xionLogoView)
+        self.addSubview(self.xionLogoView)
         
         _xionTitleLabel.font = UIFont(name: "Orbitron-Medium", size: 16.0)
         _xionTitleLabel.text = "XION arcade system control panel"
@@ -31,6 +33,8 @@ class HeaderView: UIView {
         _xionJapaneseLabel.text = "ザイーオンゲームセンターのシステム制御プログラム"
         _xionJapaneseLabel.textColor = UIColor.whiteColor()
         self.addSubview(_xionJapaneseLabel)
+        
+        self.addSubview(self.connectionStatusView)
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -52,7 +56,7 @@ class HeaderView: UIView {
             width: logoDimensions,
             height: logoDimensions
         )
-        _xionLogoView.frame = logoFrame
+        self.xionLogoView.frame = logoFrame
         
         let titleJPVerticalMargin: CGFloat = 5.0
         let titleLabelSize = _xionTitleLabel.sizeThatFits(bounds.size)
@@ -74,17 +78,14 @@ class HeaderView: UIView {
             height: jpLabelSize.height + 2.0
         )
         _xionJapaneseLabel.frame = jpTitleFrame
-    }
-    
-    // MARK: API
-    
-    func beginAnimating()
-    {
-        _xionLogoView.beginAnimating()
-    }
-    
-    func stopAnimating()
-    {
-        _xionLogoView.stopAnimating()
+        
+        let connectionStatusDimensions = CGSize(width: rint((1.0 / 8.0) * bounds.size.width), height: bounds.size.height)
+        let connectionStatusFrame = CGRect(
+            x: bounds.size.width - connectionStatusDimensions.width,
+            y: 0.0,
+            width: connectionStatusDimensions.width,
+            height: connectionStatusDimensions.height
+        )
+        self.connectionStatusView.frame = connectionStatusFrame
     }
 }
