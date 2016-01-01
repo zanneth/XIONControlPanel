@@ -41,7 +41,7 @@
 		0C20E2B51C33514100BA789B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C20E2BA1C33529700BA789B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationViewController.swift; sourceTree = "<group>"; };
-		0C3CAEA41C3350C800B856AD /* XIONControlPanel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XIONControlPanel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C3CAEA41C3350C800B856AD /* XION.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XION.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3CAEAE1C3350C800B856AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C3CAEB11C3350C800B856AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C3CAEB31C3350C800B856AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		0C3CAEA51C3350C800B856AD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C3CAEA41C3350C800B856AD /* XIONControlPanel.app */,
+				0C3CAEA41C3350C800B856AD /* XION.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 			);
 			name = XIONControlPanel;
 			productName = XIONControlPanel;
-			productReference = 0C3CAEA41C3350C800B856AD /* XIONControlPanel.app */;
+			productReference = 0C3CAEA41C3350C800B856AD /* XION.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -419,7 +419,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -436,7 +436,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
 			};
