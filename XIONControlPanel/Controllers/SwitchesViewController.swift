@@ -57,6 +57,11 @@ class SwitchesViewController: UIViewController,
     {
         let reuseID = SwitchesViewController.collectionViewCellReuseIdentifier
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoDeviceCellView
+        
+        var device = WemoDevice()
+        device.name = "beatmania IIDX"
+        cell.device = device
+        
         cell.ordinal = indexPath.row + 1
         
         return cell
@@ -70,5 +75,11 @@ class SwitchesViewController: UIViewController,
         let cellsPerRow = CGFloat(SwitchesViewController.collectionViewCellsPerRow)
         let dimensions = rint(collectionView.bounds.size.width / cellsPerRow) - spacing
         return CGSize(width: dimensions, height: dimensions)
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
+    {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WemoDeviceCellView
+        cell.toggled = !cell.toggled
     }
 }
