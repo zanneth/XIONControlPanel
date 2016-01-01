@@ -89,13 +89,15 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     {
         _headerView.xionLogoView.beginAnimating()
         
-        _updateConnectivityStatus(.Connecting)
-        _server.connect { (error: NSError?) -> Void in
-            if (error == nil) {
-                self._reloadDevices()
-                self._startUpdatingDevices()
-            } else {
-                self._updateConnectivityStatus(.Error)
+        if (!_server.connected) {
+            _updateConnectivityStatus(.Connecting)
+            _server.connect { (error: NSError?) -> Void in
+                if (error == nil) {
+                    self._reloadDevices()
+                    self._startUpdatingDevices()
+                } else {
+                    self._updateConnectivityStatus(.Error)
+                }
             }
         }
     }
