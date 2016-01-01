@@ -71,7 +71,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         let visualizationFrame = CGRect(
             x: bodyBounds.origin.x,
             y: bodyBounds.origin.y,
-            width: rint(0.6 * bodyBounds.size.width),
+            width: rint(0.55 * bodyBounds.size.width),
             height: bodyBounds.size.height
         )
         _visualizationController.view.frame = visualizationFrame
@@ -153,6 +153,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self._headerView.connectionStatusView.connectivityStatus = status
+            self._visualizationController.connectionStatus = status
         }
     }
     

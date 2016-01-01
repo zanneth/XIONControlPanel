@@ -69,6 +69,8 @@ public class WemoDeviceCellView: WemoCellView {
         
         _nameLabel.font = UIFont(name: "Orbitron-Medium", size: 16.0)
         _nameLabel.numberOfLines = 3
+        _nameLabel.allowsDefaultTighteningForTruncation = true
+        _nameLabel.adjustsFontSizeToFitWidth = true
         _nameLabel.textColor = UIColor.whiteColor()
         self.contentView.addSubview(_nameLabel)
         

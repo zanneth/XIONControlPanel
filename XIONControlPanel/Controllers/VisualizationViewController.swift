@@ -18,6 +18,7 @@ class VisualizationViewController: UIViewController {
     private var _scene:             SCNScene = SCNScene()
     private var _sceneView:         SCNView?
     private var _cameraNode:        SCNNode = SCNNode()
+    private var _lightNode:         SCNNode = SCNNode()
     private var _cubletsNode:       SCNNode = SCNNode()
     private var _cublets:           [SCNNode] = []
     private var _percentActivated:  Float = 0.0
@@ -25,6 +26,7 @@ class VisualizationViewController: UIViewController {
     static private let cubletsDimensions = 5
     static private let cubletsSize = 1.0
     static private let cubletsSpacing = 2.0
+    static private let rotationAnimationKey = "RotationAnimation"
     
     // MARK: Overrides
     
@@ -63,6 +65,21 @@ class VisualizationViewController: UIViewController {
     }
     
     // MARK: API
+    
+    var connectionStatus: ConnectionStatus = .Disconnected
+    {
+        didSet
+        {
+            switch (self.connectionStatus) {
+            case .Disconnected, .Connecting, .Error:
+                _cubletsNode.paused = true
+                _lightNode.light?.color = UIColor(white: 0.3, alpha: 1.0)
+            case .Connected:
+                _cubletsNode.paused = false
+                _lightNode.light?.color = UIColor.whiteColor()
+            }
+        }
+    }
     
     var percentActivated: Float
     {
@@ -110,8 +127,17 @@ class VisualizationViewController: UIViewController {
                 return min(((log10(4.0 * (t + 0.03)) + 1.0) / 1.5), 1.0)
             }
             
-            _cubletsNode.runAction(rotAction)
+            // modify the existing rotation animation as well, so that we have a
+            // smooth transition
+            let longTermAnimKey = VisualizationViewController.rotationAnimationKey
+            let newLongTermRotAction = _createLongTermRotationAnimation((rotCoeff * 2.0 * π), rotAxis)
+            _cubletsNode.removeActionForKey(longTermAnimKey)
+            
+            let actionSeq = SCNAction.sequence([rotAction, newLongTermRotAction])
+            _cubletsNode.runAction(actionSeq, forKey: longTermAnimKey)
         }
+        
+        _setAnimationSpeed(CGFloat(1.0 + (percentage * 2.0)))
         
         _percentActivated = percentage
     }
@@ -140,11 +166,11 @@ class VisualizationViewController: UIViewController {
         light.type = SCNLightTypeOmni
         light.color = UIColor.whiteColor()
         
-        let lightNode = SCNNode()
-        lightNode.light = light
-        lightNode.position = _cameraNode.position
+        _lightNode = SCNNode()
+        _lightNode.light = light
+        _lightNode.position = _cameraNode.position
         
-        _scene.rootNode.addChildNode(lightNode)
+        _scene.rootNode.addChildNode(_lightNode)
     }
     
     internal func _setupModel()
@@ -158,7 +184,7 @@ class VisualizationViewController: UIViewController {
         let volume = (dimf * sz) + ((dimf - 1.0) * spacing)
         let orig = -volume / 2.0
         
-        // setup material and geometry. each node needs its own material for activation effect.
+        // setup material and geometry. each node needs its own material for the activation effect.
         let geom = SCNBox(width: CGFloat(sz), height: CGFloat(sz), length: CGFloat(sz), chamferRadius: 0.0)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor.whiteColor()
@@ -191,10 +217,10 @@ class VisualizationViewController: UIViewController {
     
     internal func _setupAnimation()
     {
-        let rotAxis = SCNVector3Make(0.25, 1.75, 1.0)
         let rotAngle = 2.0 * π
-        let rotAction = SCNAction.repeatActionForever(SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 40.0))
-        _cubletsNode.runAction(rotAction)
+        let rotAxis = SCNVector3Make(0.25, 1.75, 1.0)
+        let rotationAction = _createLongTermRotationAnimation(rotAngle, rotAxis)
+        _cubletsNode.runAction(rotationAction, forKey: VisualizationViewController.rotationAnimationKey)
     }
     
     internal func _setupEffects()
@@ -210,5 +236,20 @@ class VisualizationViewController: UIViewController {
     {
         let material = cublet.geometry?.firstMaterial
         material?.diffuse.contents = (activated ? UIColor.redColor() : UIColor.whiteColor())
+    }
+    
+    internal func _setAnimationSpeed(speed: CGFloat)
+    {
+        let key = VisualizationViewController.rotationAnimationKey
+        let action = _cubletsNode.actionForKey(key)
+        _cubletsNode.removeActionForKey(key)
+        
+        action?.speed = speed
+        _cubletsNode.runAction(action!, forKey: key)
+    }
+    
+    internal func _createLongTermRotationAnimation(rotAngle: CGFloat, _ rotAxis: SCNVector3) -> SCNAction
+    {
+        return SCNAction.repeatActionForever(SCNAction.rotateByAngle(rotAngle, aroundAxis: rotAxis, duration: 40.0))
     }
 }
