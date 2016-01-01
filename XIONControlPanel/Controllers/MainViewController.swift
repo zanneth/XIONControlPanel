@@ -103,7 +103,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     
     // MARK: SwitchesViewControllerDelegate
     
-    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice)
+    func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice])
     {
         _updateVisualization(true)
     }
@@ -120,6 +120,8 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         }
         
         let percentageActivated = Float(activatedDevicesCount) / Float(self.devices.count)
-        _visualizationController.setPercentActivated(percentageActivated, animated: animated)
+        if (percentageActivated != _visualizationController.percentActivated) {
+            _visualizationController.setPercentActivated(percentageActivated, animated: animated)
+        }
     }
 }

@@ -11,32 +11,53 @@ import Foundation
 import UIKit
 
 protocol SwitchesViewControllerDelegate: class {
-    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice)
+    func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice])
 }
 
 extension SwitchesViewControllerDelegate {
-    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice) {}
+    func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice]) {}
 }
 
 class SwitchesViewController: UIViewController,
                               UICollectionViewDataSource,
                               UICollectionViewDelegateFlowLayout
 {
-    weak var delegate:           SwitchesViewControllerDelegate?
-    
+    weak var delegate:                  SwitchesViewControllerDelegate?
     private var _collectionView:        UICollectionView = UICollectionView(frame: CGRectZero,
                                                                             collectionViewLayout: UICollectionViewFlowLayout())
-    private var _currentDevicesHash:    UInt = 0
     
-    static private let collectionViewCellReuseIdentifier = "SwitchesCollectionViewReuseID"
+    static private let collectionViewDeviceSwitchCellReuseIdentifier = "DeviceSwitchReuseID"
+    static private let collectionViewActionCellReuseIdentifier = "ActionCellReuseID"
     static private let collectionViewCellsSpacing: CGFloat = 5.0
     static private let collectionViewCellsPerRow = 3
+    
+    private enum ActionCell: Int {
+        case AllOn
+        case AllOff
+        
+        func name() -> String
+        {
+            switch self {
+            case .AllOn:
+                return "All On"
+            case .AllOff:
+                return "All Off"
+            }
+        }
+        
+        static let count: Int = {
+            var max = 0
+            while let _ = ActionCell(rawValue: max) { ++max }
+            return max
+        }()
+    }
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        let reuseID = SwitchesViewController.collectionViewCellReuseIdentifier
+        let deviceCellReuseID = SwitchesViewController.collectionViewDeviceSwitchCellReuseIdentifier
+        let actionCellReuseID = SwitchesViewController.collectionViewActionCellReuseIdentifier
         let layout = _collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .Vertical
         layout.minimumLineSpacing = SwitchesViewController.collectionViewCellsSpacing
@@ -45,7 +66,8 @@ class SwitchesViewController: UIViewController,
         _collectionView.backgroundColor = UIColor.blackColor()
         _collectionView.delegate = self
         _collectionView.dataSource = self
-        _collectionView.registerClass(WemoDeviceCellView.self, forCellWithReuseIdentifier: reuseID)
+        _collectionView.registerClass(WemoDeviceCellView.self, forCellWithReuseIdentifier: deviceCellReuseID)
+        _collectionView.registerClass(WemoActionCellView.self, forCellWithReuseIdentifier: actionCellReuseID)
         self.view.addSubview(_collectionView)
     }
     
@@ -63,15 +85,7 @@ class SwitchesViewController: UIViewController,
     {
         didSet
         {
-            var devicesHash: UInt = 0
-            for device in devices {
-                devicesHash += UInt(device.serial.hash)
-            }
-            
-            if (_currentDevicesHash != devicesHash) {
-                _collectionView.reloadData()
-                _currentDevicesHash = devicesHash
-            }
+            _collectionView.reloadData()
         }
     }
     
@@ -79,19 +93,28 @@ class SwitchesViewController: UIViewController,
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return self.devices.count
+        return self.devices.count + ActionCell.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
     {
-        let reuseID = SwitchesViewController.collectionViewCellReuseIdentifier
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoDeviceCellView
-        
-        let device = self.devices[indexPath.row]
-        cell.device = device
-        cell.ordinal = indexPath.row + 1
-        
-        return cell
+        if (indexPath.item < ActionCell.count) {
+            let reuseID = SwitchesViewController.collectionViewActionCellReuseIdentifier
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoActionCellView
+            cell.textLabel.text = ActionCell(rawValue: indexPath.item)?.name().uppercaseString
+            
+            return cell
+        } else {
+            let reuseID = SwitchesViewController.collectionViewDeviceSwitchCellReuseIdentifier
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoDeviceCellView
+            
+            let deviceIdx = indexPath.item - ActionCell.count
+            let device = self.devices[deviceIdx]
+            cell.device = device
+            cell.ordinal = deviceIdx + 1
+            
+            return cell
+        }
     }
     
     func collectionView(collectionView: UICollectionView,
@@ -101,17 +124,44 @@ class SwitchesViewController: UIViewController,
         let spacing = SwitchesViewController.collectionViewCellsSpacing
         let cellsPerRow = CGFloat(SwitchesViewController.collectionViewCellsPerRow)
         let dimensions = rint(collectionView.bounds.size.width / cellsPerRow) - spacing
-        return CGSize(width: dimensions, height: dimensions)
+        
+        if (indexPath.item < ActionCell.count) {
+            return CGSize(width: collectionView.bounds.size.width, height: rint(dimensions / 2.0))
+        } else {
+            return CGSize(width: dimensions, height: dimensions)
+        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WemoDeviceCellView
-        cell.toggled = !cell.toggled
-        
-        let device = self.devices[indexPath.row]
-        device.state = (cell.toggled ? .On : .Off)
-        
-        self.delegate?.switchesViewControllerDidToggleDevice(self, device: device)
+        if (indexPath.item < ActionCell.count) {
+            let tappedActionCell = ActionCell(rawValue: indexPath.item)
+            
+            var currentDelay: NSTimeInterval = 0.0
+            for var i = ActionCell.count; i < collectionView.numberOfItemsInSection(indexPath.section); ++i {
+                let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as! WemoDeviceCellView
+                
+                UIView.animateWithDuration(0.3, delay: currentDelay, options: UIViewAnimationOptions(), animations: { () -> Void in
+                    cell.toggled = (tappedActionCell == .AllOn)
+                }, completion: nil)
+                
+                currentDelay += 0.05
+            }
+            
+            for device in self.devices {
+                device.state = (tappedActionCell == .AllOn ? .On : .Off)
+            }
+            
+            self.delegate?.switchesViewControllerDidToggleDevices(self, devices: self.devices)
+        } else {
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WemoDeviceCellView
+            cell.toggled = !cell.toggled
+            
+            let deviceIdx = indexPath.item - ActionCell.count
+            let device = self.devices[deviceIdx]
+            device.state = (cell.toggled ? .On : .Off)
+            
+            self.delegate?.switchesViewControllerDidToggleDevices(self, devices: [device])
+        }
     }
 }

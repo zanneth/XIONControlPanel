@@ -19,7 +19,7 @@
 		0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF531C34BC9800AF847F /* XIONLogoView.swift */; };
 		0C41EF561C35ABCD00AF847F /* ConnectionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF551C35ABCD00AF847F /* ConnectionStatusView.swift */; };
 		0C4315001C35B1E700164559 /* WemoDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4314FF1C35B1E700164559 /* WemoDevice.swift */; };
-		0C4315061C35E67600164559 /* WemoDeviceCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4315051C35E67600164559 /* WemoDeviceCellView.swift */; };
+		0C4315061C35E67600164559 /* WemoCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4315051C35E67600164559 /* WemoCellView.swift */; };
 		0C63A8731C337381007E4B52 /* CubletsTechnique.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8721C337381007E4B52 /* CubletsTechnique.plist */; };
 		0C63A8761C3373D1007E4B52 /* HorizontalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */; };
 		0C63A8781C3373D9007E4B52 /* HorizontalBlur.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */; };
@@ -49,7 +49,7 @@
 		0C41EF531C34BC9800AF847F /* XIONLogoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XIONLogoView.swift; sourceTree = "<group>"; };
 		0C41EF551C35ABCD00AF847F /* ConnectionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionStatusView.swift; sourceTree = "<group>"; };
 		0C4314FF1C35B1E700164559 /* WemoDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoDevice.swift; sourceTree = "<group>"; };
-		0C4315051C35E67600164559 /* WemoDeviceCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoDeviceCellView.swift; sourceTree = "<group>"; };
+		0C4315051C35E67600164559 /* WemoCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoCellView.swift; sourceTree = "<group>"; };
 		0C63A8721C337381007E4B52 /* CubletsTechnique.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CubletsTechnique.plist; sourceTree = "<group>"; };
 		0C63A8751C3373D1007E4B52 /* HorizontalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.vsh; sourceTree = "<group>"; };
 		0C63A8771C3373D9007E4B52 /* HorizontalBlur.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HorizontalBlur.fsh; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 				0C41EF4F1C34B97700AF847F /* HeaderView.swift */,
 				0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */,
 				0C41EF531C34BC9800AF847F /* XIONLogoView.swift */,
-				0C4315051C35E67600164559 /* WemoDeviceCellView.swift */,
+				0C4315051C35E67600164559 /* WemoCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,7 +290,7 @@
 				0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */,
 				0C41EF501C34B97700AF847F /* HeaderView.swift in Sources */,
 				0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */,
-				0C4315061C35E67600164559 /* WemoDeviceCellView.swift in Sources */,
+				0C4315061C35E67600164559 /* WemoCellView.swift in Sources */,
 				0CF9A48E1C35E9C800276F13 /* SwitchIndicatorView.swift in Sources */,
 				0C4315001C35B1E700164559 /* WemoDevice.swift in Sources */,
 			);

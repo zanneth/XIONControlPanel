@@ -1,5 +1,5 @@
 //
-//  WemoDeviceCellView.swift
+//  WemoDeviceView.swift
 //  XIONControlPanel
 //
 //  Created by Charles Magahern on 12/31/15.
@@ -8,27 +8,64 @@
 
 import UIKit
 
-class WemoDeviceCellView: UICollectionViewCell {
+public class WemoCellView: UICollectionViewCell {
+    private var _selectionOverlayView:  UIView = UIView()
+    
+    static private var disabledBackgroundColor = UIColor(white: 0.2, alpha: 1.0)
+    static private var enabledBackgroundColor = UIColor(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
+    
+    override init(frame: CGRect)
+    {
+        super.init(frame: frame)
+        
+        self.contentView.backgroundColor = WemoCellView.disabledBackgroundColor
+        
+        _selectionOverlayView.backgroundColor = UIColor.clearColor()
+        self.contentView.addSubview(_selectionOverlayView)
+    }
+    
+    required public init?(coder aDecoder: NSCoder)
+    {
+        fatalError("unsupported")
+    }
+    
+    // MARK: Overrides
+    
+    override public func layoutSubviews()
+    {
+        super.layoutSubviews()
+        
+        let bounds = self.contentView.bounds
+        _selectionOverlayView.frame = bounds
+    }
+    
+    override public var highlighted: Bool {
+        didSet
+        {
+            if (self.highlighted) {
+                _selectionOverlayView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
+            } else {
+                UIView.animateWithDuration(1.0, animations: { () -> Void in
+                    self._selectionOverlayView.backgroundColor = UIColor.clearColor()
+                })
+            }
+        }
+    }
+}
+
+public class WemoDeviceCellView: WemoCellView {
     private var _device:                WemoDevice?
     private var _ordinal:               Int = 0
-    private var _selectionOverlayView:  UIView = UIView()
     private var _nameLabel:             UILabel = UILabel()
     private var _ordinalLabel:          UILabel = UILabel()
     private var _indicator:             SwitchIndicatorView = SwitchIndicatorView()
     
-    static private var disabledBackgroundColor = UIColor(white: 0.2, alpha: 1.0)
-    static private var enabledBackgroundColor = UIColor(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
     static private var disabledAnnotationsColor = UIColor.darkGrayColor()
     static private var enabledAnnotationsColor = UIColor.blackColor()
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        
-        self.contentView.backgroundColor = WemoDeviceCellView.disabledBackgroundColor
-        
-        _selectionOverlayView.backgroundColor = UIColor.clearColor()
-        self.contentView.addSubview(_selectionOverlayView)
         
         _nameLabel.font = UIFont(name: "Orbitron-Medium", size: 16.0)
         _nameLabel.numberOfLines = 3
@@ -44,21 +81,19 @@ class WemoDeviceCellView: UICollectionViewCell {
         self.contentView.addSubview(_indicator)
     }
     
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         fatalError("unsupported")
     }
     
     // MARK: Overrides
     
-    override func layoutSubviews()
+    override public func layoutSubviews()
     {
         super.layoutSubviews()
         
         let bounds = self.contentView.bounds
         let padding: CGFloat = 10.0
-        
-        _selectionOverlayView.frame = bounds
         
         _indicator.frame = CGRect(
             x: padding,
@@ -84,19 +119,6 @@ class WemoDeviceCellView: UICollectionViewCell {
         )
     }
     
-    override var highlighted: Bool {
-        didSet
-        {
-            if (self.highlighted) {
-                _selectionOverlayView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
-            } else {
-                UIView.animateWithDuration(1.0, animations: { () -> Void in
-                    self._selectionOverlayView.backgroundColor = UIColor.clearColor()
-                })
-            }
-        }
-    }
-
     // MARK: API
     
     var device: WemoDevice?
@@ -140,14 +162,39 @@ class WemoDeviceCellView: UICollectionViewCell {
             _indicator.status = toggled
             
             if (toggled) {
-                self.contentView.backgroundColor = WemoDeviceCellView.enabledBackgroundColor
+                self.contentView.backgroundColor = WemoCellView.enabledBackgroundColor
                 _indicator.foregroundColor = WemoDeviceCellView.enabledAnnotationsColor
                 _ordinalLabel.textColor = WemoDeviceCellView.enabledAnnotationsColor
             } else {
-                self.contentView.backgroundColor = WemoDeviceCellView.disabledBackgroundColor
+                self.contentView.backgroundColor = WemoCellView.disabledBackgroundColor
                 _indicator.foregroundColor = WemoDeviceCellView.disabledAnnotationsColor
                 _ordinalLabel.textColor = WemoDeviceCellView.disabledAnnotationsColor
             }
         }
+    }
+}
+
+public class WemoActionCellView: WemoCellView {
+    public var textLabel: UILabel = UILabel()
+    
+    override init(frame: CGRect)
+    {
+        super.init(frame: frame)
+        
+        self.textLabel.font = UIFont(name: "Orbitron-Medium", size: 21.0)
+        self.textLabel.textColor = UIColor.whiteColor()
+        self.textLabel.textAlignment = .Center
+        self.addSubview(self.textLabel)
+    }
+    
+    required public init?(coder aDecoder: NSCoder)
+    {
+        fatalError("unsupported")
+    }
+    
+    override public func layoutSubviews()
+    {
+        super.layoutSubviews()
+        self.textLabel.frame = self.bounds
     }
 }

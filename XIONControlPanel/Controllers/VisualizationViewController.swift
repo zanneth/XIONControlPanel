@@ -15,11 +15,12 @@ import UIKit
 let π = CGFloat(M_PI)
 
 class VisualizationViewController: UIViewController {
-    private var _scene:         SCNScene = SCNScene()
-    private var _sceneView:     SCNView?
-    private var _cameraNode:    SCNNode = SCNNode()
-    private var _cubletsNode:   SCNNode = SCNNode()
-    private var _cublets:       [SCNNode] = []
+    private var _scene:             SCNScene = SCNScene()
+    private var _sceneView:         SCNView?
+    private var _cameraNode:        SCNNode = SCNNode()
+    private var _cubletsNode:       SCNNode = SCNNode()
+    private var _cublets:           [SCNNode] = []
+    private var _percentActivated:  Float = 0.0
     
     static private let cubletsDimensions = 5
     static private let cubletsSize = 1.0
@@ -63,6 +64,19 @@ class VisualizationViewController: UIViewController {
     
     // MARK: API
     
+    var percentActivated: Float
+    {
+        get
+        {
+            return _percentActivated
+        }
+        
+        set(percentage)
+        {
+            self.setPercentActivated(percentage, animated: false)
+        }
+    }
+    
     func setPercentActivated(percentage: Float, animated: Bool)
     {
         let cubletsCount = _cublets.count
@@ -98,6 +112,8 @@ class VisualizationViewController: UIViewController {
             
             _cubletsNode.runAction(rotAction)
         }
+        
+        _percentActivated = percentage
     }
     
     // MARK: Internal
