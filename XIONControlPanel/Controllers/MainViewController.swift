@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     private var _visualizationController:   VisualizationViewController = VisualizationViewController()
     private var _switchesController:        SwitchesViewController = SwitchesViewController()
     private var _headerView:                HeaderView = HeaderView()
@@ -24,10 +24,18 @@ class MainViewController: UIViewController {
         self.addChildViewController(_visualizationController)
         self.view.addSubview(_visualizationController.view)
         
+        _switchesController.delegate = self
         self.addChildViewController(_switchesController)
         self.view.addSubview(_switchesController.view)
         
         self.view.addSubview(_headerView)
+        
+        // DEBUG
+        for _ in 0 ..< 10 {
+            let device = WemoDevice()
+            device.name = "beatmania IIDX"
+            self.devices.append(device)
+        }
     }
     
     override func viewDidLayoutSubviews()
@@ -80,5 +88,38 @@ class MainViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool
     {
         return true
+    }
+    
+    // MARK: API
+    
+    var devices: [WemoDevice] = []
+    {
+        didSet
+        {
+            _switchesController.devices = devices
+            _updateVisualization(false)
+        }
+    }
+    
+    // MARK: SwitchesViewControllerDelegate
+    
+    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice)
+    {
+        _updateVisualization(true)
+    }
+    
+    // MARK: Internal
+    
+    internal func _updateVisualization(animated: Bool)
+    {
+        var activatedDevicesCount = 0
+        for device in self.devices {
+            if (device.state == .On) {
+                ++activatedDevicesCount
+            }
+        }
+        
+        let percentageActivated = Float(activatedDevicesCount) / Float(self.devices.count)
+        _visualizationController.setPercentActivated(percentageActivated, animated: animated)
     }
 }

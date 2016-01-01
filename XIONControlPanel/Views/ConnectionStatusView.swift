@@ -74,7 +74,8 @@ class ConnectionStatusView: UIView {
     
     // MARK: API
     
-    var connectivityStatus: Bool {
+    var connectivityStatus: Bool
+    {
         get
         {
             return _connectivityStatus

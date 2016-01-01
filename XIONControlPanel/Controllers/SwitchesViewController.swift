@@ -10,12 +10,23 @@ import Darwin
 import Foundation
 import UIKit
 
+protocol SwitchesViewControllerDelegate: class {
+    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice)
+}
+
+extension SwitchesViewControllerDelegate {
+    func switchesViewControllerDidToggleDevice(controller: SwitchesViewController, device: WemoDevice) {}
+}
+
 class SwitchesViewController: UIViewController,
                               UICollectionViewDataSource,
                               UICollectionViewDelegateFlowLayout
 {
-    private var _collectionView: UICollectionView = UICollectionView(frame: CGRectZero,
-                                                                     collectionViewLayout: UICollectionViewFlowLayout())
+    weak var delegate:           SwitchesViewControllerDelegate?
+    
+    private var _collectionView:        UICollectionView = UICollectionView(frame: CGRectZero,
+                                                                            collectionViewLayout: UICollectionViewFlowLayout())
+    private var _currentDevicesHash:    UInt = 0
     
     static private let collectionViewCellReuseIdentifier = "SwitchesCollectionViewReuseID"
     static private let collectionViewCellsSpacing: CGFloat = 5.0
@@ -46,11 +57,29 @@ class SwitchesViewController: UIViewController,
         _collectionView.frame = bounds
     }
     
+    // MARK: API
+    
+    var devices: [WemoDevice] = []
+    {
+        didSet
+        {
+            var devicesHash: UInt = 0
+            for device in devices {
+                devicesHash += UInt(device.serial.hash)
+            }
+            
+            if (_currentDevicesHash != devicesHash) {
+                _collectionView.reloadData()
+                _currentDevicesHash = devicesHash
+            }
+        }
+    }
+    
     // MARK: UICollectionView
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 10
+        return self.devices.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
@@ -58,10 +87,8 @@ class SwitchesViewController: UIViewController,
         let reuseID = SwitchesViewController.collectionViewCellReuseIdentifier
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoDeviceCellView
         
-        var device = WemoDevice()
-        device.name = "beatmania IIDX"
+        let device = self.devices[indexPath.row]
         cell.device = device
-        
         cell.ordinal = indexPath.row + 1
         
         return cell
@@ -81,5 +108,10 @@ class SwitchesViewController: UIViewController,
     {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WemoDeviceCellView
         cell.toggled = !cell.toggled
+        
+        let device = self.devices[indexPath.row]
+        device.state = (cell.toggled ? .On : .Off)
+        
+        self.delegate?.switchesViewControllerDidToggleDevice(self, device: device)
     }
 }

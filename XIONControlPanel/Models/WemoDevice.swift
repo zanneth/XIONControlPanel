@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WemoDevice {
+class WemoDevice {
     enum State {
         case Off
         case On

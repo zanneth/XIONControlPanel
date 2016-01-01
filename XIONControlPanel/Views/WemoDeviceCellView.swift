@@ -99,7 +99,8 @@ class WemoDeviceCellView: UICollectionViewCell {
 
     // MARK: API
     
-    var device: WemoDevice? {
+    var device: WemoDevice?
+    {
         get
         {
             return _device
@@ -112,7 +113,8 @@ class WemoDeviceCellView: UICollectionViewCell {
         }
     }
     
-    var ordinal: Int {
+    var ordinal: Int
+    {
         get
         {
             return _ordinal
@@ -125,7 +127,8 @@ class WemoDeviceCellView: UICollectionViewCell {
         }
     }
     
-    var toggled: Bool {
+    var toggled: Bool
+    {
         get
         {
             return (_device?.state == .On)

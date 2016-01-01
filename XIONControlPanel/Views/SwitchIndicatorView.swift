@@ -74,7 +74,8 @@ class SwitchIndicatorView: UIView {
     
     // MARK: API
     
-    var status: Bool {
+    var status: Bool
+    {
         get
         {
             return _status
@@ -88,7 +89,8 @@ class SwitchIndicatorView: UIView {
         }
     }
     
-    var foregroundColor: UIColor {
+    var foregroundColor: UIColor
+    {
         get
         {
             return _foregroundColor
