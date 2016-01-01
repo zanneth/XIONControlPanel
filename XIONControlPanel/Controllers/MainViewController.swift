@@ -143,7 +143,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
             }
         }
         
-        let percentageActivated = Float(activatedDevicesCount) / Float(self.devices.count)
+        let percentageActivated = (self.devices.count > 0 ? Float(activatedDevicesCount) / Float(self.devices.count) : 0.0)
         if (percentageActivated != _visualizationController.percentActivated) {
             _visualizationController.setPercentActivated(percentageActivated, animated: animated)
         }
