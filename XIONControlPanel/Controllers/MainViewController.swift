@@ -9,9 +9,23 @@
 import UIKit
 
 class MainViewController: UIViewController, SwitchesViewControllerDelegate {
+    private var _server:                    WemoServer
     private var _visualizationController:   VisualizationViewController = VisualizationViewController()
     private var _switchesController:        SwitchesViewController = SwitchesViewController()
     private var _headerView:                HeaderView = HeaderView()
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
+    {
+        let url = NSURL(string: "http://10.0.1.4:8000")
+        _server = WemoServer(url!)
+        
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        fatalError("unsupported")
+    }
     
     // MARK: Overrides
     
@@ -30,12 +44,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         
         self.view.addSubview(_headerView)
         
-        // DEBUG
-        for _ in 0 ..< 10 {
-            let device = WemoDevice()
-            device.name = "beatmania IIDX"
-            self.devices.append(device)
-        }
+        _updateConnectivityStatus(.Disconnected)
     }
     
     override func viewDidLayoutSubviews()
@@ -78,6 +87,15 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     override func viewDidAppear(animated: Bool)
     {
         _headerView.xionLogoView.beginAnimating()
+        
+        _updateConnectivityStatus(.Connecting)
+        _server.connect { (error: NSError?) -> Void in
+            if (error == nil) {
+                self._reloadDevices()
+            } else {
+                self._updateConnectivityStatus(.Error)
+            }
+        }
     }
     
     override func viewDidDisappear(animated: Bool)
@@ -106,6 +124,10 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice])
     {
         _updateVisualization(true)
+        
+        for device in devices {
+            _server.toggleDevice(device, state: device.state, completion: { (error: NSError?) -> Void in })
+        }
     }
     
     // MARK: Internal
@@ -123,5 +145,27 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         if (percentageActivated != _visualizationController.percentActivated) {
             _visualizationController.setPercentActivated(percentageActivated, animated: animated)
         }
+    }
+    
+    internal func _updateConnectivityStatus(status: ConnectionStatus)
+    {
+        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+            self._headerView.connectionStatusView.connectivityStatus = status
+        }
+    }
+    
+    internal func _reloadDevices()
+    {
+        _server.fetchDevices({ (devices: [WemoDevice], error: NSError?) -> Void in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                if (error == nil) {
+                    self.devices = devices
+                    self._updateConnectivityStatus(.Connected)
+                } else {
+                    self.devices = []
+                    self._updateConnectivityStatus(.Error)
+                }
+            }
+        })
     }
 }

@@ -69,6 +69,8 @@ class SwitchesViewController: UIViewController,
         _collectionView.registerClass(WemoDeviceCellView.self, forCellWithReuseIdentifier: deviceCellReuseID)
         _collectionView.registerClass(WemoActionCellView.self, forCellWithReuseIdentifier: actionCellReuseID)
         self.view.addSubview(_collectionView)
+        
+        self.devices = []
     }
     
     override func viewDidLayoutSubviews()
@@ -102,6 +104,7 @@ class SwitchesViewController: UIViewController,
             let reuseID = SwitchesViewController.collectionViewActionCellReuseIdentifier
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoActionCellView
             cell.textLabel.text = ActionCell(rawValue: indexPath.item)?.name().uppercaseString
+            cell.enabled = (self.devices.count > 0)
             
             return cell
         } else {
@@ -136,8 +139,8 @@ class SwitchesViewController: UIViewController,
     {
         if (indexPath.item < ActionCell.count) {
             let tappedActionCell = ActionCell(rawValue: indexPath.item)
-            
             var currentDelay: NSTimeInterval = 0.0
+            
             for var i = ActionCell.count; i < collectionView.numberOfItemsInSection(indexPath.section); ++i {
                 let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as! WemoDeviceCellView
                 
@@ -162,6 +165,24 @@ class SwitchesViewController: UIViewController,
             device.state = (cell.toggled ? .On : .Off)
             
             self.delegate?.switchesViewControllerDidToggleDevices(self, devices: [device])
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if (indexPath.item < ActionCell.count) {
+            return (self.devices.count > 0)
+        } else {
+            return true
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        if (indexPath.item < ActionCell.count) {
+            return (self.devices.count > 0)
+        } else {
+            return true
         }
     }
 }

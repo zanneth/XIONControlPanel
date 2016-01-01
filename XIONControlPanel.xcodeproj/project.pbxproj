@@ -30,6 +30,10 @@
 		0C63A8851C33DC29007E4B52 /* VerticalBlur.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */; };
 		0C63A8881C33EB3B007E4B52 /* FinalRender.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */; };
 		0C63A8891C33EB3B007E4B52 /* FinalRender.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */; };
+		0CAA32791C361A2400B353CF /* WemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA32781C361A2400B353CF /* WemoServer.swift */; };
+		0CAA327B1C361CBE00B353CF /* NSErrorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA327A1C361CBE00B353CF /* NSErrorAdditions.swift */; };
+		0CAA327D1C361ECA00B353CF /* StandardError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAA327C1C361ECA00B353CF /* StandardError.swift */; };
+		0CF0F8961C362D8F00FE7752 /* NSURLAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF0F8951C362D8F00FE7752 /* NSURLAdditions.swift */; };
 		0CF9A48E1C35E9C800276F13 /* SwitchIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +66,10 @@
 		0C63A8831C33DC29007E4B52 /* VerticalBlur.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VerticalBlur.vsh; sourceTree = "<group>"; };
 		0C63A8861C33EB3B007E4B52 /* FinalRender.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.fsh; sourceTree = "<group>"; };
 		0C63A8871C33EB3B007E4B52 /* FinalRender.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = FinalRender.vsh; sourceTree = "<group>"; };
+		0CAA32781C361A2400B353CF /* WemoServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WemoServer.swift; sourceTree = "<group>"; };
+		0CAA327A1C361CBE00B353CF /* NSErrorAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSErrorAdditions.swift; sourceTree = "<group>"; };
+		0CAA327C1C361ECA00B353CF /* StandardError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardError.swift; sourceTree = "<group>"; };
+		0CF0F8951C362D8F00FE7752 /* NSURLAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLAdditions.swift; sourceTree = "<group>"; };
 		0CF9A48D1C35E9C800276F13 /* SwitchIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +110,7 @@
 				0C41EF491C34B51500AF847F /* SwitchesViewController.swift */,
 				0C20E2BA1C33529700BA789B /* MainViewController.swift */,
 				0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */,
+				0CAA32781C361A2400B353CF /* WemoServer.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -194,6 +203,9 @@
 		0C63A8791C33C622007E4B52 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0CAA327C1C361ECA00B353CF /* StandardError.swift */,
+				0CAA327A1C361CBE00B353CF /* NSErrorAdditions.swift */,
+				0CF0F8951C362D8F00FE7752 /* NSURLAdditions.swift */,
 				0C63A87B1C33C655007E4B52 /* NSValue+XIONAdditions.h */,
 				0C63A87C1C33C655007E4B52 /* NSValue+XIONAdditions.m */,
 			);
@@ -282,6 +294,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C41EF4E1C34B81F00AF847F /* KSIRingView.m in Sources */,
+				0CAA327B1C361CBE00B353CF /* NSErrorAdditions.swift in Sources */,
+				0CF0F8961C362D8F00FE7752 /* NSURLAdditions.swift in Sources */,
+				0CAA32791C361A2400B353CF /* WemoServer.swift in Sources */,
 				0C41EF561C35ABCD00AF847F /* ConnectionStatusView.swift in Sources */,
 				0C63A87D1C33C655007E4B52 /* NSValue+XIONAdditions.m in Sources */,
 				0C20E2BD1C33534F00BA789B /* VisualizationViewController.swift in Sources */,
@@ -291,6 +306,7 @@
 				0C41EF501C34B97700AF847F /* HeaderView.swift in Sources */,
 				0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */,
 				0C4315061C35E67600164559 /* WemoCellView.swift in Sources */,
+				0CAA327D1C361ECA00B353CF /* StandardError.swift in Sources */,
 				0CF9A48E1C35E9C800276F13 /* SwitchIndicatorView.swift in Sources */,
 				0C4315001C35B1E700164559 /* WemoDevice.swift in Sources */,
 			);

@@ -175,7 +175,7 @@ public class WemoDeviceCellView: WemoCellView {
 }
 
 public class WemoActionCellView: WemoCellView {
-    public var textLabel: UILabel = UILabel()
+    var textLabel: UILabel = UILabel()
     
     override init(frame: CGRect)
     {
@@ -196,5 +196,17 @@ public class WemoActionCellView: WemoCellView {
     {
         super.layoutSubviews()
         self.textLabel.frame = self.bounds
+    }
+    
+    var enabled: Bool = true
+    {
+        didSet
+        {
+            if (enabled) {
+                self.textLabel.textColor = UIColor.whiteColor()
+            } else {
+                self.textLabel.textColor = UIColor.darkGrayColor()
+            }
+        }
     }
 }

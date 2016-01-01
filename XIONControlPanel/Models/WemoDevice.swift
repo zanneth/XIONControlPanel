@@ -28,35 +28,33 @@ class WemoDevice {
     init()
     {}
     
-    init(_ responseData: NSData)
+    init(_ dict: NSDictionary)
     {
-        if let dict = (try? NSJSONSerialization.JSONObjectWithData(responseData, options: NSJSONReadingOptions())) as? NSDictionary {
-            if let name = dict["name"] as? NSString {
-                self.name = String(name)
+        if let name = dict["name"] as? NSString {
+            self.name = String(name)
+        }
+        
+        if let host = dict["host"] as? NSString {
+            self.host = String(host)
+        }
+        
+        if let model = dict["model"] as? NSString {
+            self.model = String(model)
+        }
+        
+        if let state = dict["state"] as? NSNumber {
+            switch (state.integerValue) {
+            case 0:
+                self.state = .Off
+            case 1:
+                self.state = .On
+            default:
+                self.state = .Off
             }
-            
-            if let host = dict["host"] as? NSString {
-                self.host = String(host)
-            }
-            
-            if let model = dict["model"] as? NSString {
-                self.model = String(model)
-            }
-            
-            if let state = dict["state"] as? NSNumber {
-                switch (state.integerValue) {
-                case 0:
-                    self.state = .Off
-                case 1:
-                    self.state = .On
-                default:
-                    self.state = .Off
-                }
-            }
-            
-            if let serial = dict["serialnumber"] as? NSString {
-                self.serial = String(serial)
-            }
+        }
+        
+        if let serial = dict["serialnumber"] as? NSString {
+            self.serial = String(serial)
         }
     }
 }

@@ -9,9 +9,9 @@
 import UIKit
 
 class ConnectionStatusView: UIView {
-    private var _connectivityStatus:Bool    = false
-    private var _japaneseLabel:     UILabel = UILabel()
-    private var _englishLabel:      UILabel = UILabel()
+    private var _connectivityStatus: ConnectionStatus = .Disconnected
+    private var _japaneseLabel:      UILabel = UILabel()
+    private var _englishLabel:       UILabel = UILabel()
     
     static private let labelsVMargin: CGFloat = 5.0
     
@@ -27,7 +27,7 @@ class ConnectionStatusView: UIView {
         _englishLabel.textColor = UIColor.whiteColor()
         self.addSubview(_englishLabel)
         
-        self.connectivityStatus = false
+        self.connectivityStatus = .Disconnected
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -74,7 +74,7 @@ class ConnectionStatusView: UIView {
     
     // MARK: API
     
-    var connectivityStatus: Bool
+    var connectivityStatus: ConnectionStatus
     {
         get
         {
@@ -85,17 +85,30 @@ class ConnectionStatusView: UIView {
         {
             _connectivityStatus = newStatus
             
-            if (_connectivityStatus == true) {
+            switch (_connectivityStatus) {
+            case .Disconnected:
+                _japaneseLabel.text = "非直結"
+                _japaneseLabel.textColor = UIColor.redColor()
+                
+                _englishLabel.text = "offline"
+                _englishLabel.textColor = UIColor.redColor()
+            case .Connecting:
+                _japaneseLabel.text = "接続中"
+                _japaneseLabel.textColor = UIColor.yellowColor()
+                
+                _englishLabel.text = "connecting..."
+                _englishLabel.textColor = UIColor.yellowColor()
+            case .Connected:
                 _japaneseLabel.text = "直結"
                 _japaneseLabel.textColor = UIColor.greenColor()
                 
                 _englishLabel.text = "online"
                 _englishLabel.textColor = UIColor.greenColor()
-            } else {
-                _japaneseLabel.text = "非直結"
+            case .Error:
+                _japaneseLabel.text = "過失"
                 _japaneseLabel.textColor = UIColor.redColor()
                 
-                _englishLabel.text = "offline"
+                _englishLabel.text = "error"
                 _englishLabel.textColor = UIColor.redColor()
             }
             
