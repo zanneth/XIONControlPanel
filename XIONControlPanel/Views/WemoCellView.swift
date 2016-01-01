@@ -54,7 +54,6 @@ public class WemoCellView: UICollectionViewCell {
 }
 
 public class WemoDeviceCellView: WemoCellView {
-    private var _device:                WemoDevice?
     private var _ordinal:               Int = 0
     private var _nameLabel:             UILabel = UILabel()
     private var _ordinalLabel:          UILabel = UILabel()
@@ -123,17 +122,11 @@ public class WemoDeviceCellView: WemoCellView {
     
     // MARK: API
     
-    var device: WemoDevice?
+    var deviceName: String = ""
     {
-        get
+        didSet
         {
-            return _device
-        }
-        
-        set(device)
-        {
-            _device = device
-            _nameLabel.text = _device?.name.uppercaseString
+            _nameLabel.text = self.deviceName.uppercaseString
             self.setNeedsLayout()
         }
     }
@@ -153,16 +146,10 @@ public class WemoDeviceCellView: WemoCellView {
         }
     }
     
-    var toggled: Bool
+    var toggled: Bool = false
     {
-        get
+        didSet
         {
-            return (_device?.state == .On)
-        }
-        
-        set(toggled)
-        {
-            _device?.state = (toggled ? .On : .Off)
             _indicator.status = toggled
             
             if (toggled) {

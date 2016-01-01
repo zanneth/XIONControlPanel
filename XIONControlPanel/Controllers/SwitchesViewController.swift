@@ -88,20 +88,13 @@ class SwitchesViewController: UIViewController,
     {
         didSet
         {
+            // sort devices by name
+            self.devices.sortInPlace({ (d1: WemoDevice, d2: WemoDevice) -> Bool in
+                return (d1.name.compare(d2.name) == .OrderedAscending)
+            })
+            
             let hash = self.devices.reduce(0, combine: {$0 ^ $1.hashValue})
             if (hash != _currentDevicesHash) {
-                // sort by name
-                self.devices.sortInPlace({ (d1: WemoDevice, d2: WemoDevice) -> Bool in
-                    return (d1.name.compare(d2.name) == .OrderedAscending)
-                })
-                
-                // replace "Dance Dance Revolution" names with "DDR" to save space
-                for device in self.devices {
-                    if let range = device.name.rangeOfString("Dance Dance Revolution") {
-                        device.name.replaceRange(range, with: "DDR")
-                    }
-                }
-                
                 let previousSet = NSOrderedSet(array: oldValue)
                 let newSet = NSOrderedSet(array: self.devices)
                 var insertedIndexPaths: [NSIndexPath] = []
@@ -174,11 +167,10 @@ class SwitchesViewController: UIViewController,
             let reuseID = SwitchesViewController.collectionViewDeviceSwitchCellReuseIdentifier
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseID, forIndexPath: indexPath) as! WemoDeviceCellView
             
-            let deviceIdx = indexPath.item - ActionCell.count
-            let device = self.devices[deviceIdx]
-            cell.device = device
+            let device = _deviceAtIndexPath(indexPath)
+            cell.deviceName = device.name
             cell.toggled = (device.state == .On)
-            cell.ordinal = deviceIdx + 1
+            cell.ordinal = indexPath.item - ActionCell.count + 1
             
             return cell
         }
@@ -224,8 +216,7 @@ class SwitchesViewController: UIViewController,
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as! WemoDeviceCellView
             cell.toggled = !cell.toggled
             
-            let deviceIdx = indexPath.item - ActionCell.count
-            let device = self.devices[deviceIdx]
+            let device = _deviceAtIndexPath(indexPath)
             device.state = (cell.toggled ? .On : .Off)
             
             self.delegate?.switchesViewControllerDidToggleDevices(self, devices: [device])
@@ -248,5 +239,14 @@ class SwitchesViewController: UIViewController,
         } else {
             return true
         }
+    }
+    
+    // MARK: Internal
+    
+    internal func _deviceAtIndexPath(indexPath: NSIndexPath) -> WemoDevice
+    {
+        let deviceIdx = indexPath.item - ActionCell.count
+        let device = self.devices[deviceIdx]
+        return device
     }
 }

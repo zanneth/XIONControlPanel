@@ -130,6 +130,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         _updateVisualization(true)
         
         for device in devices {
+            // WARNING: don't commit
             _server.toggleDevice(device, state: device.state, completion: { (error: NSError?) -> Void in })
         }
     }

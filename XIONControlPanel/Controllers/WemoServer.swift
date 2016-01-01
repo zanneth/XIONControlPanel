@@ -93,6 +93,8 @@ class WemoServer {
             let request = NSMutableURLRequest(URL: url!)
             request.HTTPMethod = "POST"
             
+            print("Toggle: \(url!.absoluteString)")
+            
             let task = _urlSession.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 var clientError: NSError? = nil
                 
