@@ -17,7 +17,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
     {
-        let url = NSURL(string: "http://10.0.1.4:8000")
+        let url = NSURL(string: "http://midna.xionsf.com:5000")
         _server = WemoServer(url!)
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
