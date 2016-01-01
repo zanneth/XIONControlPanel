@@ -25,6 +25,7 @@ class SwitchesViewController: UIViewController,
     weak var delegate:                  SwitchesViewControllerDelegate?
     private var _collectionView:        UICollectionView = UICollectionView(frame: CGRectZero,
                                                                             collectionViewLayout: UICollectionViewFlowLayout())
+    private var _currentDevicesHash:    Int = 0
     
     static private let collectionViewDeviceSwitchCellReuseIdentifier = "DeviceSwitchReuseID"
     static private let collectionViewActionCellReuseIdentifier = "ActionCellReuseID"
@@ -87,7 +88,69 @@ class SwitchesViewController: UIViewController,
     {
         didSet
         {
-            _collectionView.reloadData()
+            let hash = self.devices.reduce(0, combine: {$0 ^ $1.hashValue})
+            if (hash != _currentDevicesHash) {
+                // sort by name
+                self.devices.sortInPlace({ (d1: WemoDevice, d2: WemoDevice) -> Bool in
+                    return (d1.name.compare(d2.name) == .OrderedAscending)
+                })
+                
+                // replace "Dance Dance Revolution" names with "DDR" to save space
+                for device in self.devices {
+                    if let range = device.name.rangeOfString("Dance Dance Revolution") {
+                        device.name.replaceRange(range, with: "DDR")
+                    }
+                }
+                
+                let previousSet = NSOrderedSet(array: oldValue)
+                let newSet = NSOrderedSet(array: self.devices)
+                var insertedIndexPaths: [NSIndexPath] = []
+                var updatedIndexPaths: [NSIndexPath] = []
+                var deletedIndexPaths: [NSIndexPath] = []
+                
+                // if we have devices now and we didn't before, or vice versa,
+                // we need to update the action cells
+                if ((oldValue.count == 0 && self.devices.count != 0) || (self.devices.count == 0 && oldValue.count != 0)) {
+                    for var actionCellIdx = 0; actionCellIdx < ActionCell.count; ++actionCellIdx {
+                        let actionCellIndexPath = NSIndexPath(forItem: actionCellIdx, inSection: 0)
+                        updatedIndexPaths.append(actionCellIndexPath)
+                    }
+                }
+                
+                // find deletes and updates
+                for (idx, device) in previousSet.enumerate() {
+                    let itemIndex = idx + ActionCell.count
+                    let curIndexPath = NSIndexPath(forItem: itemIndex, inSection: 0)
+                    
+                    if (!newSet.containsObject(device)) {
+                        deletedIndexPaths.append(curIndexPath)
+                    } else if (idx < newSet.count) {
+                        let deviceInNewSet = newSet.objectAtIndex(idx) as! WemoDevice
+                        if (deviceInNewSet != (device as! WemoDevice)) {
+                            updatedIndexPaths.append(curIndexPath)
+                        }
+                    }
+                }
+                
+                // find insertions
+                for (idx, device) in newSet.enumerate() {
+                    if (!previousSet.containsObject(device)) {
+                        let itemIndex = idx + ActionCell.count
+                        let insertedIndexPath = NSIndexPath(forItem: itemIndex, inSection: 0)
+                        insertedIndexPaths.append(insertedIndexPath)
+                    }
+                }
+                
+                UIView.performWithoutAnimation { () -> Void in
+                    self._collectionView.performBatchUpdates({ () -> Void in
+                        self._collectionView.deleteItemsAtIndexPaths(deletedIndexPaths)
+                        self._collectionView.reloadItemsAtIndexPaths(updatedIndexPaths)
+                        self._collectionView.insertItemsAtIndexPaths(insertedIndexPaths)
+                    }, completion: nil)
+                }
+                
+                _currentDevicesHash = hash
+            }
         }
     }
     
@@ -114,6 +177,7 @@ class SwitchesViewController: UIViewController,
             let deviceIdx = indexPath.item - ActionCell.count
             let device = self.devices[deviceIdx]
             cell.device = device
+            cell.toggled = (device.state == .On)
             cell.ordinal = deviceIdx + 1
             
             return cell

@@ -132,6 +132,7 @@ public class WemoDeviceCellView: WemoCellView {
         {
             _device = device
             _nameLabel.text = _device?.name.uppercaseString
+            self.setNeedsLayout()
         }
     }
     
@@ -146,6 +147,7 @@ public class WemoDeviceCellView: WemoCellView {
         {
             _ordinal = ordinal
             _ordinalLabel.text = String(format: "%.2d", _ordinal)
+            self.setNeedsLayout()
         }
     }
     

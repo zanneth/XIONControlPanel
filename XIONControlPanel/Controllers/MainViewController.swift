@@ -13,6 +13,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     private var _visualizationController:   VisualizationViewController = VisualizationViewController()
     private var _switchesController:        SwitchesViewController = SwitchesViewController()
     private var _headerView:                HeaderView = HeaderView()
+    private var _updateDevices:             Bool = false
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
     {
@@ -92,6 +93,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         _server.connect { (error: NSError?) -> Void in
             if (error == nil) {
                 self._reloadDevices()
+                self._startUpdatingDevices()
             } else {
                 self._updateConnectivityStatus(.Error)
             }
@@ -164,8 +166,27 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
                 } else {
                     self.devices = []
                     self._updateConnectivityStatus(.Error)
+                    self._stopUpdatingDevices()
                 }
             }
         })
+    }
+    
+    internal func _startUpdatingDevices()
+    {
+        _updateDevices = true
+        
+        let interval = dispatch_time(DISPATCH_TIME_NOW, Int64(10 * Double(NSEC_PER_SEC)))
+        dispatch_after(interval, dispatch_get_main_queue()) { () -> Void in
+            if (self._updateDevices) {
+                self._reloadDevices()
+                self._startUpdatingDevices()
+            }
+        }
+    }
+    
+    internal func _stopUpdatingDevices()
+    {
+        _updateDevices = false
     }
 }

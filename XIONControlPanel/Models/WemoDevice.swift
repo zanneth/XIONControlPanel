@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WemoDevice {
+class WemoDevice: Hashable {
     enum State {
         case Off
         case On
@@ -57,4 +57,22 @@ class WemoDevice {
             self.serial = String(serial)
         }
     }
+    
+    var hashValue: Int
+    {
+        var hash: Int = 0x0
+        hash ^= self.name.hash
+        hash ^= self.host.hash
+        hash ^= self.model.hash
+        hash ^= self.state.hashValue
+        hash ^= self.type.hashValue
+        hash ^= self.serial.hashValue
+        
+        return hash
+    }
+}
+
+func ==(lhs: WemoDevice, rhs: WemoDevice) -> Bool
+{
+    return (lhs.serial == rhs.serial)
 }
