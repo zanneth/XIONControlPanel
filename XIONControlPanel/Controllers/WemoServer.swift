@@ -98,6 +98,7 @@ class WemoServer {
                 
                 if (error != nil) {
                     clientError = NSError.xionError(.ConnectionError, underlying: error)
+                    self._logError("Error toggling device \"\(device.name)\"", error: clientError!)
                 }
                 
                 completion(clientError)
