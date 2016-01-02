@@ -61,8 +61,8 @@ class SwitchesViewController: UIViewController,
         let actionCellReuseID = SwitchesViewController.collectionViewActionCellReuseIdentifier
         let layout = _collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .Vertical
-        layout.minimumLineSpacing = SwitchesViewController.collectionViewCellsSpacing
         layout.minimumInteritemSpacing = SwitchesViewController.collectionViewCellsSpacing
+        layout.minimumLineSpacing = SwitchesViewController.collectionViewCellsSpacing
         
         _collectionView.backgroundColor = UIColor.blackColor()
         _collectionView.delegate = self
@@ -182,7 +182,7 @@ class SwitchesViewController: UIViewController,
     {
         let spacing = SwitchesViewController.collectionViewCellsSpacing
         let cellsPerRow = CGFloat(SwitchesViewController.collectionViewCellsPerRow)
-        let dimensions = rint(collectionView.bounds.size.width / cellsPerRow) - spacing
+        let dimensions = rint((collectionView.bounds.size.width / cellsPerRow) - ((spacing * (cellsPerRow - 1.0)) / cellsPerRow))
         
         if (indexPath.item < ActionCell.count) {
             return CGSize(width: collectionView.bounds.size.width, height: rint(dimensions / 2.0))
