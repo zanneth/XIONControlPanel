@@ -87,6 +87,8 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     
     override func viewDidAppear(animated: Bool)
     {
+        super.viewDidAppear(animated)
+        
         _headerView.xionLogoView.beginAnimating()
         
         if (!_server.connected) {
@@ -100,11 +102,6 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
                 }
             }
         }
-    }
-    
-    override func viewDidDisappear(animated: Bool)
-    {
-        _headerView.xionLogoView.stopAnimating()
     }
     
     override func prefersStatusBarHidden() -> Bool
