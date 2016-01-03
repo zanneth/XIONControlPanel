@@ -52,6 +52,8 @@ class XIONLogoView: UIView {
     
     func beginAnimating()
     {
+        self.stopAnimating()
+        
         let duration: NSTimeInterval = 20.0
         
         let clockwiseAnim = CABasicAnimation(keyPath: "transform.rotation")

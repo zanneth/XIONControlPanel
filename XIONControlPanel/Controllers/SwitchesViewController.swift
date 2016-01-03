@@ -182,7 +182,7 @@ class SwitchesViewController: UIViewController,
     {
         let spacing = SwitchesViewController.collectionViewCellsSpacing
         let cellsPerRow = CGFloat(SwitchesViewController.collectionViewCellsPerRow)
-        let dimensions = rint((collectionView.bounds.size.width / cellsPerRow) - ((spacing * (cellsPerRow - 1.0)) / cellsPerRow))
+        let dimensions = floor((collectionView.bounds.size.width / cellsPerRow) - ((spacing * (cellsPerRow - 1.0)) / cellsPerRow))
         
         if (indexPath.item < ActionCell.count) {
             return CGSize(width: collectionView.bounds.size.width, height: rint(dimensions / 2.0))
