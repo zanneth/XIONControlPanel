@@ -68,8 +68,8 @@ class XIONLogoView: UIView {
         counterClockwiseAnim.duration = duration
         counterClockwiseAnim.repeatCount = Float.infinity
         
-        _logoInnerRingImageView.layer.addAnimation(clockwiseAnim, forKey: "")
-        _logoOuterRingImageView.layer.addAnimation(counterClockwiseAnim, forKey: "")
+        _logoInnerRingImageView.layer.addAnimation(clockwiseAnim, forKey: "LogoClockwiseAnimation")
+        _logoOuterRingImageView.layer.addAnimation(counterClockwiseAnim, forKey: "LogoCounterclockwiseAnimation")
     }
     
     func stopAnimating()
