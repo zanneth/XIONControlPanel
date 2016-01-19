@@ -199,8 +199,9 @@ class SwitchesViewController: UIViewController,
             
             for var i = ActionCell.count; i < collectionView.numberOfItemsInSection(indexPath.section); ++i {
                 let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as! WemoDeviceCellView
+                let animOptions = UIViewAnimationOptions([.AllowUserInteraction])
                 
-                UIView.animateWithDuration(0.3, delay: currentDelay, options: UIViewAnimationOptions(), animations: { () -> Void in
+                UIView.animateWithDuration(0.3, delay: currentDelay, options: animOptions, animations: {
                     cell.toggled = (tappedActionCell == .AllOn)
                 }, completion: nil)
                 

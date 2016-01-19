@@ -45,9 +45,10 @@ public class WemoCellView: UICollectionViewCell {
             if (self.highlighted) {
                 _selectionOverlayView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
             } else {
-                UIView.animateWithDuration(1.0, animations: { () -> Void in
+                let animOptions = UIViewAnimationOptions([.AllowUserInteraction])
+                UIView.animateWithDuration(1.0, delay: 0.0, options: animOptions, animations: {
                     self._selectionOverlayView.backgroundColor = UIColor.clearColor()
-                })
+                }, completion: nil)
             }
         }
     }
