@@ -10,6 +10,7 @@
 		0C20E2B91C33514100BA789B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2B51C33514100BA789B /* AppDelegate.swift */; };
 		0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2BA1C33529700BA789B /* MainViewController.swift */; };
 		0C20E2BD1C33534F00BA789B /* VisualizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */; };
+		0C21329B1C4DDC3E001E8F08 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C21329A1C4DDC3E001E8F08 /* Semaphore.swift */; };
 		0C3CAEAF1C3350C800B856AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEAE1C3350C800B856AD /* Assets.xcassets */; };
 		0C3CAEB21C3350C800B856AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C3CAEB01C3350C800B856AD /* LaunchScreen.storyboard */; };
 		0C41EF4A1C34B51500AF847F /* SwitchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41EF491C34B51500AF847F /* SwitchesViewController.swift */; };
@@ -41,6 +42,7 @@
 		0C20E2B51C33514100BA789B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C20E2BA1C33529700BA789B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationViewController.swift; sourceTree = "<group>"; };
+		0C21329A1C4DDC3E001E8F08 /* Semaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
 		0C3CAEA41C3350C800B856AD /* XION.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XION.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C3CAEAE1C3350C800B856AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0C3CAEB11C3350C800B856AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		0C63A8791C33C622007E4B52 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0C21329A1C4DDC3E001E8F08 /* Semaphore.swift */,
 				0CAA327C1C361ECA00B353CF /* StandardError.swift */,
 				0CAA327A1C361CBE00B353CF /* NSErrorAdditions.swift */,
 				0CF0F8951C362D8F00FE7752 /* NSURLAdditions.swift */,
@@ -304,6 +307,7 @@
 				0C20E2B91C33514100BA789B /* AppDelegate.swift in Sources */,
 				0C20E2BB1C33529700BA789B /* MainViewController.swift in Sources */,
 				0C41EF501C34B97700AF847F /* HeaderView.swift in Sources */,
+				0C21329B1C4DDC3E001E8F08 /* Semaphore.swift in Sources */,
 				0C41EF541C34BC9800AF847F /* XIONLogoView.swift in Sources */,
 				0C4315061C35E67600164559 /* WemoCellView.swift in Sources */,
 				0CAA327D1C361ECA00B353CF /* StandardError.swift in Sources */,
