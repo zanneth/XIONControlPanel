@@ -138,7 +138,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         var activatedDevicesCount = 0
         for device in self.devices {
             if (device.state == .On) {
-                ++activatedDevicesCount
+                activatedDevicesCount += 1
             }
         }
         

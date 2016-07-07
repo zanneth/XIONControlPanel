@@ -50,6 +50,8 @@ class VisualizationViewController: UIViewController {
         _setupModel()
         _setupAnimation()
         _setupEffects()
+        
+        _beginModelResetTimer()
     }
     
     override func viewDidAppear(animated: Bool)
@@ -110,7 +112,7 @@ class VisualizationViewController: UIViewController {
         
         for cublet in shuffledCublets {
             _setCubletActivated(cublet, activated: (cubletsActivated < cubletsToActivate))
-            ++cubletsActivated
+            cubletsActivated += 1
         }
         
         if (animated) {
@@ -175,6 +177,7 @@ class VisualizationViewController: UIViewController {
     
     internal func _setupModel()
     {
+        _cubletsNode.enumerateChildNodesUsingBlock { $0.0.removeFromParentNode() }
         _cublets.removeAll()
         
         let sz = Float(VisualizationViewController.cubletsSize)
@@ -191,13 +194,13 @@ class VisualizationViewController: UIViewController {
         material.transparency = 0.75
         
         // generate nodes for each cublet
-        for var xi = 0; xi < dim; ++xi {
+        for xi in 0 ..< dim {
             let x = orig + Float(xi) * (sz + spacing)
             
-            for var yi = 0; yi < dim; ++yi {
+            for yi in 0 ..< dim {
                 let y = orig + Float(yi) * (sz + spacing)
                 
-                for var zi = 0; zi < dim; ++zi {
+                for zi in 0 ..< dim {
                     let z = orig + Float(zi) * (sz + spacing)
                     
                     let nodeGeom = geom.copy() as! SCNGeometry
@@ -212,7 +215,9 @@ class VisualizationViewController: UIViewController {
         }
         
         _cubletsNode.position = SCNVector3Zero
-        _scene.rootNode.addChildNode(_cubletsNode)
+        if (_cubletsNode.parentNode == nil) {
+            _scene.rootNode.addChildNode(_cubletsNode)
+        }
     }
     
     internal func _setupAnimation()
@@ -220,6 +225,7 @@ class VisualizationViewController: UIViewController {
         let rotAngle = 2.0 * π
         let rotAxis = SCNVector3Make(0.25, 1.75, 1.0)
         let rotationAction = _createLongTermRotationAnimation(rotAngle, rotAxis)
+        _cubletsNode.removeAllActions()
         _cubletsNode.runAction(rotationAction, forKey: VisualizationViewController.rotationAnimationKey)
     }
     
@@ -232,6 +238,30 @@ class VisualizationViewController: UIViewController {
         _sceneView?.technique = technique
     }
     
+    internal func _beginModelResetTimer()
+    {
+        /* since this visualization is running all the time, trigonometric functions begin
+           malfunctioning at very large numbers. just reload the model every 24 hours so we
+           don't have to see it */
+        let reloadModelTime = dispatch_time(DISPATCH_TIME_NOW, Int64(60 * 60 * 24 * NSEC_PER_SEC))
+        dispatch_after(reloadModelTime, dispatch_get_main_queue()) { [weak self] in
+            if let strongSelf = self {
+                strongSelf._cubletsNode.removeFromParentNode()
+                strongSelf._cubletsNode = SCNNode()
+                
+                strongSelf._setupModel()
+                strongSelf._setupAnimation()
+                
+                let currentPercentActivated = strongSelf.percentActivated
+                let currentConnectionStatus = strongSelf.connectionStatus
+                strongSelf.percentActivated = currentPercentActivated
+                strongSelf.connectionStatus = currentConnectionStatus
+                
+                strongSelf._beginModelResetTimer()
+            }
+        }
+    }
+    
     internal func _setCubletActivated(cublet: SCNNode, activated: Bool)
     {
         let material = cublet.geometry?.firstMaterial
@@ -241,11 +271,12 @@ class VisualizationViewController: UIViewController {
     internal func _setAnimationSpeed(speed: CGFloat)
     {
         let key = VisualizationViewController.rotationAnimationKey
-        let action = _cubletsNode.actionForKey(key)
-        _cubletsNode.removeActionForKey(key)
-        
-        action?.speed = speed
-        _cubletsNode.runAction(action!, forKey: key)
+        if let action = _cubletsNode.actionForKey(key) {
+            _cubletsNode.removeActionForKey(key)
+            
+            action.speed = speed
+            _cubletsNode.runAction(action, forKey: key)
+        }
     }
     
     internal func _createLongTermRotationAnimation(rotAngle: CGFloat, _ rotAxis: SCNVector3) -> SCNAction

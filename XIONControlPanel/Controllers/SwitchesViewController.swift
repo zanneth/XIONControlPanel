@@ -48,7 +48,7 @@ class SwitchesViewController: UIViewController,
         
         static let count: Int = {
             var max = 0
-            while let _ = ActionCell(rawValue: max) { ++max }
+            while let _ = ActionCell(rawValue: max) { max += 1 }
             return max
         }()
     }
@@ -104,7 +104,7 @@ class SwitchesViewController: UIViewController,
                 // if we have devices now and we didn't before, or vice versa,
                 // we need to update the action cells
                 if ((oldValue.count == 0 && self.devices.count != 0) || (self.devices.count == 0 && oldValue.count != 0)) {
-                    for var actionCellIdx = 0; actionCellIdx < ActionCell.count; ++actionCellIdx {
+                    for actionCellIdx in 0 ..< ActionCell.count {
                         let actionCellIndexPath = NSIndexPath(forItem: actionCellIdx, inSection: 0)
                         updatedIndexPaths.append(actionCellIndexPath)
                     }
@@ -197,7 +197,7 @@ class SwitchesViewController: UIViewController,
             let tappedActionCell = ActionCell(rawValue: indexPath.item)
             var currentDelay: NSTimeInterval = 0.0
             
-            for var i = ActionCell.count; i < collectionView.numberOfItemsInSection(indexPath.section); ++i {
+            for i in ActionCell.count ..< collectionView.numberOfItemsInSection(indexPath.section) {
                 let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as! WemoDeviceCellView
                 let animOptions = UIViewAnimationOptions([.AllowUserInteraction])
                 
