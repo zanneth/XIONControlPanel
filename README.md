@@ -1,7 +1,7 @@
 XION Arcade WEMO-Enabled Control Panel
 ================================================================================
 
-This is an iPad application designed for remote control of XION Arcade devices.
+This is an iOS application designed for remote control of XION Arcade devices.
 The app is designed for XION but could work with any WEMO-enabled household by
 changing only one line of code.
 
