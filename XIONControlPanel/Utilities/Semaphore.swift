@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Semaphore {
+class Semaphore
+{
     private var _semaphore: dispatch_semaphore_t
     
     init(value: Int)

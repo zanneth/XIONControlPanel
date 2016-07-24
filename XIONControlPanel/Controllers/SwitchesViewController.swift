@@ -10,11 +10,13 @@ import Darwin
 import Foundation
 import UIKit
 
-protocol SwitchesViewControllerDelegate: class {
+protocol SwitchesViewControllerDelegate: class
+{
     func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice])
 }
 
-extension SwitchesViewControllerDelegate {
+extension SwitchesViewControllerDelegate
+{
     func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice]) {}
 }
 
@@ -30,9 +32,9 @@ class SwitchesViewController: UIViewController,
     static private let collectionViewDeviceSwitchCellReuseIdentifier = "DeviceSwitchReuseID"
     static private let collectionViewActionCellReuseIdentifier = "ActionCellReuseID"
     static private let collectionViewCellsSpacing: CGFloat = 5.0
-    static private let collectionViewCellsPerRow = 3
     
-    private enum ActionCell: Int {
+    private enum ActionCell: Int
+    {
         case AllOn
         case AllOff
         
@@ -181,9 +183,20 @@ class SwitchesViewController: UIViewController,
                         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
     {
         let spacing = SwitchesViewController.collectionViewCellsSpacing
-        let cellsPerRow = CGFloat(SwitchesViewController.collectionViewCellsPerRow)
-        let dimensions = floor((collectionView.bounds.size.width / cellsPerRow) - ((spacing * (cellsPerRow - 1.0)) / cellsPerRow))
+        let bounds = collectionView.bounds
+        var cellsPerRow: CGFloat = 0.0
         
+        switch (self.traitCollection.horizontalSizeClass) {
+        case .Regular, .Compact where (bounds.size.width >= 400.0):
+            cellsPerRow = 3.0
+            break
+        case .Compact:
+            cellsPerRow = 2.0
+        default:
+            cellsPerRow = 2.0
+        }
+        
+        let dimensions = floor((collectionView.bounds.size.width / cellsPerRow) - ((spacing * (cellsPerRow - 1.0)) / cellsPerRow))
         if (indexPath.item < ActionCell.count) {
             return CGSize(width: collectionView.bounds.size.width, height: rint(dimensions / 2.0))
         } else {

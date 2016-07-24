@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SwitchIndicatorView: UIView {
+class SwitchIndicatorView: UIView
+{
     private var _status:            Bool = false
     private var _foregroundColor:   UIColor = UIColor.whiteColor()
     private var _outerCircleLayer:  CAShapeLayer = CAShapeLayer()

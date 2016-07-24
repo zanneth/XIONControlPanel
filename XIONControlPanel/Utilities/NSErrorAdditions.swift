@@ -8,12 +8,14 @@
 
 import Foundation
 
-enum XIONErrorCode: Int {
+enum XIONErrorCode: Int
+{
     case Unknown
     case ConnectionError
 }
 
-extension NSError {
+extension NSError
+{
     private static let XIONErrorDomain = "com.xionsf.controlpanel"
     
     class func xionError(code: XIONErrorCode) -> NSError

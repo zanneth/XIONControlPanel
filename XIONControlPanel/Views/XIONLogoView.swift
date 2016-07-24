@@ -8,7 +8,8 @@
 
 import UIKit
 
-class XIONLogoView: UIView {
+class XIONLogoView: UIView
+{
     private var _xionLogoImageView:         UIImageView = UIImageView()
     private var _logoInnerRingImageView:    UIImageView = UIImageView()
     private var _logoOuterRingImageView:    UIImageView = UIImageView()

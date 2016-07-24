@@ -7,8 +7,10 @@
 
 import Foundation
 
-extension NSURL {
-    var requestParameters: [String : String]? {
+extension NSURL
+{
+    var requestParameters: [String : String]?
+    {
         get
         {
             let urlComponents = self.absoluteString.componentsSeparatedByString("/")

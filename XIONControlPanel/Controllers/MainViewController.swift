@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MainViewController: UIViewController, SwitchesViewControllerDelegate {
+class MainViewController: UIViewController, SwitchesViewControllerDelegate
+{
     private var _server:                    WemoServer
     private var _visualizationController:   VisualizationViewController = VisualizationViewController()
     private var _switchesController:        SwitchesViewController = SwitchesViewController()
@@ -53,11 +54,13 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         super.viewDidLayoutSubviews()
         
         let bounds = self.view.bounds
+        let horizontalSizeClass = self.traitCollection.horizontalSizeClass
+        
         let headerBounds = CGRect(
             x: 0.0,
             y: 0.0,
             width: bounds.size.width,
-            height: rint(bounds.size.height / 10.0)
+            height: rint(bounds.size.height / 8.0)
         )
         let bodyBounds = CGRect(
             x: 0.0,
@@ -76,10 +79,20 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
         )
         _visualizationController.view.frame = visualizationFrame
         
+        var switchesOriginX: CGFloat = 0.0
+        var switchesWidth: CGFloat = 0.0
+        if (horizontalSizeClass == .Regular) {
+            switchesOriginX = CGRectGetMaxX(visualizationFrame)
+            switchesWidth = bodyBounds.size.width - visualizationFrame.size.width
+        } else {
+            switchesOriginX = 0.0
+            switchesWidth = bodyBounds.size.width
+        }
+        
         let switchesControllerFrame = CGRect(
-            x: CGRectGetMaxX(visualizationFrame),
+            x: switchesOriginX,
             y: bodyBounds.origin.y,
-            width: bodyBounds.size.width - visualizationFrame.size.width,
+            width: switchesWidth,
             height: bodyBounds.size.height
         )
         _switchesController.view.frame = switchesControllerFrame
@@ -102,6 +115,12 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
                 }
             }
         }
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        _updateSizeClassPresentation()
     }
     
     override func prefersStatusBarHidden() -> Bool
@@ -133,6 +152,16 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     
     // MARK: Internal
     
+    internal func _updateSizeClassPresentation()
+    {
+        let horizontalSizeClass = self.traitCollection.horizontalSizeClass
+        if (horizontalSizeClass == .Regular) {
+            _visualizationController.view.hidden = false
+        } else {
+            _visualizationController.view.hidden = true
+        }
+    }
+    
     internal func _updateVisualization(animated: Bool)
     {
         var activatedDevicesCount = 0
@@ -152,6 +181,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate {
     {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
             self._headerView.connectionStatusView.connectivityStatus = status
+            self._headerView.setNeedsLayout()
             self._visualizationController.connectionStatus = status
         }
     }

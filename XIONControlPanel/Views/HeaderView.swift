@@ -10,7 +10,8 @@ import Darwin
 import Foundation
 import UIKit
 
-class HeaderView: UIView {
+class HeaderView: UIView
+{
     var xionLogoView:               XIONLogoView = XIONLogoView()
     var connectionStatusView:       ConnectionStatusView = ConnectionStatusView()
     
@@ -58,31 +59,39 @@ class HeaderView: UIView {
         )
         self.xionLogoView.frame = logoFrame
         
-        let titleJPVerticalMargin: CGFloat = 5.0
-        let titleLabelSize = _xionTitleLabel.sizeThatFits(bounds.size)
-        let jpLabelSize = _xionJapaneseLabel.sizeThatFits(bounds.size)
-        let totalLabelsHeight = titleLabelSize.height + titleJPVerticalMargin + jpLabelSize.height
+        if (self.traitCollection.horizontalSizeClass == .Compact) {
+            _xionTitleLabel.hidden = true
+            _xionJapaneseLabel.hidden = true
+        } else {
+            _xionTitleLabel.hidden = false
+            _xionJapaneseLabel.hidden = false
         
-        let titleFrame = CGRect(
-            x: CGRectGetMaxX(logoFrame) + hpadding * 2.0,
-            y: rint(bounds.size.height / 2.0 - totalLabelsHeight / 2.0),
-            width: titleLabelSize.width,
-            height: titleLabelSize.height
-        )
-        _xionTitleLabel.frame = titleFrame
+            let titleJPVerticalMargin: CGFloat = 5.0
+            let titleLabelSize = _xionTitleLabel.sizeThatFits(bounds.size)
+            let jpLabelSize = _xionJapaneseLabel.sizeThatFits(bounds.size)
+            let totalLabelsHeight = titleLabelSize.height + titleJPVerticalMargin + jpLabelSize.height
+                
+            let titleFrame = CGRect(
+                x: CGRectGetMaxX(logoFrame) + hpadding * 2.0,
+                y: rint(bounds.size.height / 2.0 - totalLabelsHeight / 2.0),
+                width: titleLabelSize.width,
+                height: titleLabelSize.height
+            )
+            _xionTitleLabel.frame = titleFrame
+            
+            let jpTitleFrame = CGRect(
+                x: titleFrame.origin.x,
+                y: CGRectGetMaxY(titleFrame) + titleJPVerticalMargin,
+                width: jpLabelSize.width,
+                height: jpLabelSize.height + 2.0
+            )
+            _xionJapaneseLabel.frame = jpTitleFrame
+        }
         
-        let jpTitleFrame = CGRect(
-            x: titleFrame.origin.x,
-            y: CGRectGetMaxY(titleFrame) + titleJPVerticalMargin,
-            width: jpLabelSize.width,
-            height: jpLabelSize.height + 2.0
-        )
-        _xionJapaneseLabel.frame = jpTitleFrame
-        
-        let connectionStatusDimensions = CGSize(width: rint((1.0 / 8.0) * bounds.size.width), height: bounds.size.height)
+        let connectionStatusDimensions = self.connectionStatusView.sizeThatFits(bounds.size)
         let connectionStatusFrame = CGRect(
-            x: bounds.size.width - connectionStatusDimensions.width,
-            y: 0.0,
+            x: bounds.size.width - connectionStatusDimensions.width - hpadding,
+            y: rint(bounds.size.height / 2.0 - connectionStatusDimensions.height / 2.0),
             width: connectionStatusDimensions.width,
             height: connectionStatusDimensions.height
         )

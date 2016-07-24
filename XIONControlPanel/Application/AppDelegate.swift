@@ -9,7 +9,8 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate
+{
     var window: UIWindow?
     var mainViewController: MainViewController = MainViewController()
 
@@ -36,6 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
     {
-        return UIInterfaceOrientationMask.Landscape
+        var mask: UIInterfaceOrientationMask = .Portrait
+        
+        if (UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
+            mask = UIInterfaceOrientationMask.Portrait
+        } else {
+            mask = UIInterfaceOrientationMask.All
+        }
+        
+        return mask
     }
 }

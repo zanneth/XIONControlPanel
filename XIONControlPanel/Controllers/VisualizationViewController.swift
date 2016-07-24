@@ -14,7 +14,8 @@ import UIKit
 
 let π = CGFloat(M_PI)
 
-class VisualizationViewController: UIViewController {
+class VisualizationViewController: UIViewController
+{
     private var _scene:             SCNScene = SCNScene()
     private var _sceneView:         SCNView?
     private var _cameraNode:        SCNNode = SCNNode()
