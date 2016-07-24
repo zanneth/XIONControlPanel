@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ConnectionStatusView: UIView {
+class ConnectionStatusView: UIView
+{
     private var _connectivityStatus: ConnectionStatus = .Disconnected
     private var _japaneseLabel:      UILabel = UILabel()
     private var _englishLabel:       UILabel = UILabel()

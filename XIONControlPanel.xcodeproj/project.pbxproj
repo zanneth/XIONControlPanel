@@ -109,8 +109,8 @@
 		0C20E2B61C33514100BA789B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0C41EF491C34B51500AF847F /* SwitchesViewController.swift */,
 				0C20E2BA1C33529700BA789B /* MainViewController.swift */,
+				0C41EF491C34B51500AF847F /* SwitchesViewController.swift */,
 				0C20E2BC1C33534F00BA789B /* VisualizationViewController.swift */,
 				0CAA32781C361A2400B353CF /* WemoServer.swift */,
 			);
@@ -427,7 +427,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -444,7 +444,7 @@
 				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -8,14 +8,16 @@
 
 import Foundation
 
-enum ConnectionStatus {
+enum ConnectionStatus
+{
     case Disconnected
     case Connecting
     case Connected
     case Error
 }
 
-class WemoServer {
+class WemoServer
+{
     private(set) var baseURL:    NSURL
     private(set) var connected:  Bool = false
     
@@ -108,7 +110,8 @@ class WemoServer {
     }
 }
 
-internal class WemoOperation : NSOperation {
+internal class WemoOperation : NSOperation
+{
     var baseURL:   NSURL
     var session:   NSURLSession
     
@@ -121,7 +124,8 @@ internal class WemoOperation : NSOperation {
     }
 }
 
-internal class ConnectOperation : WemoOperation {
+internal class ConnectOperation : WemoOperation
+{
     override func main()
     {
         let semaphore = Semaphore(value: 0)
@@ -140,7 +144,8 @@ internal class ConnectOperation : WemoOperation {
     }
 }
 
-internal class FetchDevicesOperation : WemoOperation {
+internal class FetchDevicesOperation : WemoOperation
+{
     internal(set) var devices: [WemoDevice] = []
     
     override func main()
@@ -176,7 +181,8 @@ internal class FetchDevicesOperation : WemoOperation {
     }
 }
 
-internal class ToggleDeviceOperation : WemoOperation {
+internal class ToggleDeviceOperation : WemoOperation
+{
     var device: WemoDevice
     var state:  WemoDevice.State
     

@@ -8,13 +8,16 @@
 
 import Foundation
 
-class WemoDevice: Hashable {
-    enum State {
+class WemoDevice: Hashable
+{
+    enum State
+    {
         case Off
         case On
     }
     
-    enum Type {
+    enum Type
+    {
         case Switch
     }
     

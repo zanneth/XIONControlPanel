@@ -8,7 +8,8 @@
 
 import UIKit
 
-public class WemoCellView: UICollectionViewCell {
+public class WemoCellView: UICollectionViewCell
+{
     private var _selectionOverlayView:  UIView = UIView()
     
     static private var disabledBackgroundColor = UIColor(white: 0.2, alpha: 1.0)
