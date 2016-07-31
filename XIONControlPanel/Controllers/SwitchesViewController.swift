@@ -211,14 +211,15 @@ class SwitchesViewController: UIViewController,
             var currentDelay: NSTimeInterval = 0.0
             
             for i in ActionCell.count ..< collectionView.numberOfItemsInSection(indexPath.section) {
-                let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as! WemoDeviceCellView
-                let animOptions = UIViewAnimationOptions([.AllowUserInteraction])
-                
-                UIView.animateWithDuration(0.3, delay: currentDelay, options: animOptions, animations: {
-                    cell.toggled = (tappedActionCell == .AllOn)
-                }, completion: nil)
-                
-                currentDelay += 0.05
+                if let cell = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: i, inSection: indexPath.section)) as? WemoDeviceCellView {
+                    let animOptions = UIViewAnimationOptions([.AllowUserInteraction])
+                    
+                    UIView.animateWithDuration(0.3, delay: currentDelay, options: animOptions, animations: {
+                        cell.toggled = (tappedActionCell == .AllOn)
+                    }, completion: nil)
+                    
+                    currentDelay += 0.05
+                }
             }
             
             for device in self.devices {
