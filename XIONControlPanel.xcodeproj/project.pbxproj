@@ -247,7 +247,8 @@
 				TargetAttributes = {
 					0C3CAEA31C3350C800B856AD = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = FZ6BMA5HA9;
+						DevelopmentTeam = 64S2YWUDC5;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -422,11 +423,15 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -440,10 +445,15 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "XIONControlPanel/SupportingFiles/XIONControlPanel-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

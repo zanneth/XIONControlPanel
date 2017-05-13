@@ -10,24 +10,24 @@ import UIKit
 
 class XIONLogoView: UIView
 {
-    private var _xionLogoImageView:         UIImageView = UIImageView()
-    private var _logoInnerRingImageView:    UIImageView = UIImageView()
-    private var _logoOuterRingImageView:    UIImageView = UIImageView()
+    fileprivate var _xionLogoImageView:         UIImageView = UIImageView()
+    fileprivate var _logoInnerRingImageView:    UIImageView = UIImageView()
+    fileprivate var _logoOuterRingImageView:    UIImageView = UIImageView()
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         
         _xionLogoImageView.image = UIImage(named: "XIONLogoWithRing")
-        _xionLogoImageView.contentMode = .ScaleAspectFit
+        _xionLogoImageView.contentMode = .scaleAspectFit
         
         _logoInnerRingImageView.image = UIImage(named: "XIONLogoInnerRing")
-        _logoInnerRingImageView.contentMode = .ScaleAspectFit
+        _logoInnerRingImageView.contentMode = .scaleAspectFit
         
         _logoOuterRingImageView.image = UIImage(named: "XIONLogoOuterRing")
-        _logoOuterRingImageView.contentMode = .ScaleAspectFit
+        _logoOuterRingImageView.contentMode = .scaleAspectFit
         
         self.addSubview(_logoOuterRingImageView)
         self.addSubview(_logoInnerRingImageView)
@@ -55,7 +55,7 @@ class XIONLogoView: UIView
     {
         self.stopAnimating()
         
-        let duration: NSTimeInterval = 20.0
+        let duration: TimeInterval = 20.0
         
         let clockwiseAnim = CABasicAnimation(keyPath: "transform.rotation")
         clockwiseAnim.fromValue = 0.0
@@ -69,8 +69,8 @@ class XIONLogoView: UIView
         counterClockwiseAnim.duration = duration
         counterClockwiseAnim.repeatCount = Float.infinity
         
-        _logoInnerRingImageView.layer.addAnimation(clockwiseAnim, forKey: "LogoClockwiseAnimation")
-        _logoOuterRingImageView.layer.addAnimation(counterClockwiseAnim, forKey: "LogoCounterclockwiseAnimation")
+        _logoInnerRingImageView.layer.add(clockwiseAnim, forKey: "LogoClockwiseAnimation")
+        _logoOuterRingImageView.layer.add(counterClockwiseAnim, forKey: "LogoCounterclockwiseAnimation")
     }
     
     func stopAnimating()

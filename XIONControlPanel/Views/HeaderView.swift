@@ -15,24 +15,24 @@ class HeaderView: UIView
     var xionLogoView:               XIONLogoView = XIONLogoView()
     var connectionStatusView:       ConnectionStatusView = ConnectionStatusView()
     
-    private var _xionTitleLabel:    UILabel = UILabel()
-    private var _xionJapaneseLabel: UILabel = UILabel()
+    fileprivate var _xionTitleLabel:    UILabel = UILabel()
+    fileprivate var _xionJapaneseLabel: UILabel = UILabel()
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         
-        self.backgroundColor = UIColor.blackColor()
+        self.backgroundColor = UIColor.black
         self.addSubview(self.xionLogoView)
         
         _xionTitleLabel.font = UIFont(name: "Orbitron-Medium", size: 16.0)
         _xionTitleLabel.text = "XION arcade system control panel"
-        _xionTitleLabel.textColor = UIColor.whiteColor()
+        _xionTitleLabel.textColor = UIColor.white
         self.addSubview(_xionTitleLabel)
         
         _xionJapaneseLabel.font = UIFont(name: "Orbitron-Medium", size: 12.0)
         _xionJapaneseLabel.text = "ザイーオンゲームセンターのシステム制御プログラム"
-        _xionJapaneseLabel.textColor = UIColor.whiteColor()
+        _xionJapaneseLabel.textColor = UIColor.white
         self.addSubview(_xionJapaneseLabel)
         
         self.addSubview(self.connectionStatusView)
@@ -59,12 +59,12 @@ class HeaderView: UIView
         )
         self.xionLogoView.frame = logoFrame
         
-        if (self.traitCollection.horizontalSizeClass == .Compact) {
-            _xionTitleLabel.hidden = true
-            _xionJapaneseLabel.hidden = true
+        if (self.traitCollection.horizontalSizeClass == .compact) {
+            _xionTitleLabel.isHidden = true
+            _xionJapaneseLabel.isHidden = true
         } else {
-            _xionTitleLabel.hidden = false
-            _xionJapaneseLabel.hidden = false
+            _xionTitleLabel.isHidden = false
+            _xionJapaneseLabel.isHidden = false
         
             let titleJPVerticalMargin: CGFloat = 5.0
             let titleLabelSize = _xionTitleLabel.sizeThatFits(bounds.size)
@@ -72,7 +72,7 @@ class HeaderView: UIView
             let totalLabelsHeight = titleLabelSize.height + titleJPVerticalMargin + jpLabelSize.height
                 
             let titleFrame = CGRect(
-                x: CGRectGetMaxX(logoFrame) + hpadding * 2.0,
+                x: logoFrame.maxX + hpadding * 2.0,
                 y: rint(bounds.size.height / 2.0 - totalLabelsHeight / 2.0),
                 width: titleLabelSize.width,
                 height: titleLabelSize.height
@@ -81,7 +81,7 @@ class HeaderView: UIView
             
             let jpTitleFrame = CGRect(
                 x: titleFrame.origin.x,
-                y: CGRectGetMaxY(titleFrame) + titleJPVerticalMargin,
+                y: titleFrame.maxY + titleJPVerticalMargin,
                 width: jpLabelSize.width,
                 height: jpLabelSize.height + 2.0
             )

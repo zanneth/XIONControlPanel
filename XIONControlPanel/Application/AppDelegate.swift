@@ -14,35 +14,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate
     var window: UIWindow?
     var mainViewController: MainViewController = MainViewController()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     {
-        application.statusBarHidden = true
+        application.isStatusBarHidden = true
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = self.mainViewController
         self.window?.makeKeyAndVisible()
         
         return true
     }
     
-    func applicationDidBecomeActive(application: UIApplication)
+    func applicationDidBecomeActive(_ application: UIApplication)
     {
         self.mainViewController.viewDidAppear(false)
     }
     
-    func applicationDidEnterBackground(application: UIApplication)
+    func applicationDidEnterBackground(_ application: UIApplication)
     {
         self.mainViewController.viewDidDisappear(false)
     }
     
-    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask
     {
-        var mask: UIInterfaceOrientationMask = .Portrait
+        var mask: UIInterfaceOrientationMask = .portrait
         
-        if (UIDevice.currentDevice().userInterfaceIdiom == .Phone) {
-            mask = UIInterfaceOrientationMask.Portrait
+        if (UIDevice.current.userInterfaceIdiom == .phone) {
+            mask = UIInterfaceOrientationMask.portrait
         } else {
-            mask = UIInterfaceOrientationMask.All
+            mask = UIInterfaceOrientationMask.all
         }
         
         return mask
