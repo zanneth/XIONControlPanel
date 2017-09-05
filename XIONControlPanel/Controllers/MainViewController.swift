@@ -10,15 +10,15 @@ import UIKit
 
 class MainViewController: UIViewController, SwitchesViewControllerDelegate
 {
-    private var _server:                    WemoServer
-    private var _visualizationController:   VisualizationViewController = VisualizationViewController()
-    private var _switchesController:        SwitchesViewController = SwitchesViewController()
-    private var _headerView:                HeaderView = HeaderView()
-    private var _updateDevices:             Bool = false
+    fileprivate var _server:                    WemoServer
+    fileprivate var _visualizationController:   VisualizationViewController = VisualizationViewController()
+    fileprivate var _switchesController:        SwitchesViewController = SwitchesViewController()
+    fileprivate var _headerView:                HeaderView = HeaderView()
+    fileprivate var _updateDevices:             Bool = false
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?)
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
-        let url = NSURL(string: "http://midna.xionsf.com:5000")
+        let url = URL(string: "http://midna.xionsf.com:5000")
         _server = WemoServer(url!)
         
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -35,7 +35,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
     {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
         self.addChildViewController(_visualizationController)
         self.view.addSubview(_visualizationController.view)
@@ -46,7 +46,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
         
         self.view.addSubview(_headerView)
         
-        _updateConnectivityStatus(.Disconnected)
+        _updateConnectivityStatus(.disconnected)
     }
     
     override func viewDidLayoutSubviews()
@@ -64,7 +64,7 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
         )
         let bodyBounds = CGRect(
             x: 0.0,
-            y: CGRectGetMaxY(headerBounds),
+            y: headerBounds.maxY,
             width: bounds.size.width,
             height: bounds.size.height - headerBounds.size.height
         )
@@ -81,8 +81,8 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
         
         var switchesOriginX: CGFloat = 0.0
         var switchesWidth: CGFloat = 0.0
-        if (horizontalSizeClass == .Regular) {
-            switchesOriginX = CGRectGetMaxX(visualizationFrame)
+        if (horizontalSizeClass == .regular) {
+            switchesOriginX = visualizationFrame.maxX
             switchesWidth = bodyBounds.size.width - visualizationFrame.size.width
         } else {
             switchesOriginX = 0.0
@@ -98,32 +98,32 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
         _switchesController.view.frame = switchesControllerFrame
     }
     
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
         
         _headerView.xionLogoView.beginAnimating()
         
         if (!_server.connected) {
-            _updateConnectivityStatus(.Connecting)
-            _server.connect { (error: NSError?) -> Void in
+            _updateConnectivityStatus(.connecting)
+            _server.connect { (error: Error?) -> Void in
                 if (error == nil) {
                     self._reloadDevices()
                     self._startUpdatingDevices()
                 } else {
-                    self._updateConnectivityStatus(.Error)
+                    self._updateConnectivityStatus(.error)
                 }
             }
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator)
     {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
         _updateSizeClassPresentation()
     }
     
-    override func prefersStatusBarHidden() -> Bool
+    override var prefersStatusBarHidden : Bool
     {
         return true
     }
@@ -141,12 +141,12 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
     
     // MARK: SwitchesViewControllerDelegate
     
-    func switchesViewControllerDidToggleDevices(controller: SwitchesViewController, devices: [WemoDevice])
+    func switchesViewControllerDidToggleDevices(_ controller: SwitchesViewController, devices: [WemoDevice])
     {
         _updateVisualization(true)
         
         for device in devices {
-            _server.toggleDevice(device, state: device.state, completion: { (error: NSError?) -> Void in })
+            _server.toggleDevice(device, state: device.state, completion: { (error: Error?) -> Void in })
         }
     }
     
@@ -155,18 +155,18 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
     internal func _updateSizeClassPresentation()
     {
         let horizontalSizeClass = self.traitCollection.horizontalSizeClass
-        if (horizontalSizeClass == .Regular) {
-            _visualizationController.view.hidden = false
+        if (horizontalSizeClass == .regular) {
+            _visualizationController.view.isHidden = false
         } else {
-            _visualizationController.view.hidden = true
+            _visualizationController.view.isHidden = true
         }
     }
     
-    internal func _updateVisualization(animated: Bool)
+    internal func _updateVisualization(_ animated: Bool)
     {
         var activatedDevicesCount = 0
         for device in self.devices {
-            if (device.state == .On) {
+            if (device.state == .on) {
                 activatedDevicesCount += 1
             }
         }
@@ -177,9 +177,9 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
         }
     }
     
-    internal func _updateConnectivityStatus(status: ConnectionStatus)
+    internal func _updateConnectivityStatus(_ status: ConnectionStatus)
     {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             self._headerView.connectionStatusView.connectivityStatus = status
             self._headerView.setNeedsLayout()
             self._visualizationController.connectionStatus = status
@@ -188,14 +188,14 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
     
     internal func _reloadDevices()
     {
-        _server.fetchDevices({ (devices: [WemoDevice], error: NSError?) -> Void in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        _server.fetchDevices({ (devices: [WemoDevice], error: Error?) -> Void in
+            DispatchQueue.main.async { () -> Void in
                 if (error == nil) {
                     self.devices = devices
-                    self._updateConnectivityStatus(.Connected)
+                    self._updateConnectivityStatus(.connected)
                 } else {
                     self.devices = []
-                    self._updateConnectivityStatus(.Error)
+                    self._updateConnectivityStatus(.error)
                 }
             }
         })
@@ -205,8 +205,8 @@ class MainViewController: UIViewController, SwitchesViewControllerDelegate
     {
         _updateDevices = true
         
-        let interval = dispatch_time(DISPATCH_TIME_NOW, Int64(10 * Double(NSEC_PER_SEC)))
-        dispatch_after(interval, dispatch_get_main_queue()) { () -> Void in
+        let interval = DispatchTime.now() + Double(Int64(10 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: interval) { () -> Void in
             if (self._updateDevices) {
                 self._reloadDevices()
                 self._startUpdatingDevices()

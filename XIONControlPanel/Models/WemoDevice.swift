@@ -12,20 +12,20 @@ class WemoDevice: Hashable
 {
     enum State
     {
-        case Off
-        case On
+        case off
+        case on
     }
     
-    enum Type
+    enum DeviceType
     {
-        case Switch
+        case `switch`
     }
     
     var name:   String = ""
     var host:   String = ""
     var model:  String = ""
-    var state:  State = .Off
-    var type:   Type = .Switch
+    var state:  State = .off
+    var type:   DeviceType = .switch
     var serial: String = ""
     
     init()
@@ -46,13 +46,13 @@ class WemoDevice: Hashable
         }
         
         if let state = dict["state"] as? NSNumber {
-            switch (state.integerValue) {
+            switch (state.intValue) {
             case 0:
-                self.state = .Off
+                self.state = .off
             case 1:
-                self.state = .On
+                self.state = .on
             default:
-                self.state = .Off
+                self.state = .off
             }
         }
         

@@ -10,22 +10,31 @@ import Foundation
 
 enum XIONErrorCode: Int
 {
-    case Unknown
-    case ConnectionError
+    case unknown
+    case connectionError
+}
+
+struct XIONError : Error
+{
+    enum ErrorCode
+    {
+        case unknown
+        case connectionError
+    }
 }
 
 extension NSError
 {
-    private static let XIONErrorDomain = "com.xionsf.controlpanel"
+    fileprivate static let XIONErrorDomain = "com.xionsf.controlpanel"
     
-    class func xionError(code: XIONErrorCode) -> NSError
+    class func xionError(_ code: XIONErrorCode) -> NSError
     {
         return self.xionError(code, userInfo: nil)
     }
     
-    class func xionError(code: XIONErrorCode, underlying: NSError?) -> NSError
+    class func xionError(_ code: XIONErrorCode, underlying: NSError?) -> NSError
     {
-        var userInfo: [NSObject : AnyObject]? = nil
+        var userInfo: [AnyHashable: Any]? = nil
         if (underlying != nil) {
             userInfo = [
                 NSUnderlyingErrorKey : underlying!
@@ -35,7 +44,7 @@ extension NSError
         return self.xionError(code, userInfo: userInfo)
     }
     
-    class func xionError(code: XIONErrorCode, userInfo: [NSObject : AnyObject]?) -> NSError
+    class func xionError(_ code: XIONErrorCode, userInfo: [AnyHashable: Any]?) -> NSError
     {
         return NSError(domain: XIONErrorDomain, code: code.rawValue, userInfo: userInfo)
     }
