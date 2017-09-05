@@ -156,14 +156,14 @@ internal class FetchDevicesOperation : WemoOperation
     {
         let semaphore = Semaphore(value: 0)
         let url = self.baseURL.appendingPathComponent("api/environment")
-        let task = self.session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
+        let task = self.session.dataTask(with: url, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if (data != nil) {
                 self.devices = self._parseDevices(data!)
             } else {
-                self.error = NSError.xionError(.connectionError, underlying: error)
+                self.error = error
             }
             semaphore.signal()
-        } as! (Data?, URLResponse?, Error?) -> Void) 
+        })
         task.resume()
         semaphore.wait()
     }

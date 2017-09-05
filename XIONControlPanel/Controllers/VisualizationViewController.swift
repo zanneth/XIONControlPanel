@@ -34,7 +34,7 @@ class VisualizationViewController: UIViewController
     
     override func loadView()
     {
-        let opts = [SCNView.Option.preferredRenderingAPI.rawValue : SCNRenderingAPI.openGLES2]
+        let opts = [SCNView.Option.preferredRenderingAPI.rawValue : SCNRenderingAPI.openGLES2.rawValue]
         let view = SCNView(frame: UIScreen.main.bounds, options: opts)
         view.backgroundColor = UIColor.black
         view.scene = _scene
