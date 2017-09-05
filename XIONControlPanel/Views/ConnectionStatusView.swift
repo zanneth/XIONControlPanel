@@ -10,25 +10,25 @@ import UIKit
 
 class ConnectionStatusView: UIView
 {
-    private var _connectivityStatus: ConnectionStatus = .Disconnected
-    private var _japaneseLabel:      UILabel = UILabel()
-    private var _englishLabel:       UILabel = UILabel()
+    fileprivate var _connectivityStatus: ConnectionStatus = .disconnected
+    fileprivate var _japaneseLabel:      UILabel = UILabel()
+    fileprivate var _englishLabel:       UILabel = UILabel()
     
-    static private let labelsVMargin: CGFloat = 5.0
+    static fileprivate let labelsVMargin: CGFloat = 5.0
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         
         _japaneseLabel.font = UIFont(name: "Orbitron-Medium", size: 24.0)
-        _japaneseLabel.textColor = UIColor.whiteColor()
+        _japaneseLabel.textColor = UIColor.white
         self.addSubview(_japaneseLabel)
         
         _englishLabel.font = UIFont(name: "Orbitron-Medium", size: 16.0)
-        _englishLabel.textColor = UIColor.whiteColor()
+        _englishLabel.textColor = UIColor.white
         self.addSubview(_englishLabel)
         
-        self.connectivityStatus = .Disconnected
+        self.connectivityStatus = .disconnected
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -38,7 +38,7 @@ class ConnectionStatusView: UIView
     
     // MARK: Overrides
     
-    override func sizeThatFits(size: CGSize) -> CGSize
+    override func sizeThatFits(_ size: CGSize) -> CGSize
     {
         let labelsVMargin = ConnectionStatusView.labelsVMargin
         let jpLabelSize = _japaneseLabel.sizeThatFits(size)
@@ -67,7 +67,7 @@ class ConnectionStatusView: UIView
         
         _englishLabel.frame = CGRect(
             x: rint(bounds.size.width / 2.0 - enLabelSize.width / 2.0),
-            y: CGRectGetMaxY(_japaneseLabel.frame) + labelsVMargin,
+            y: _japaneseLabel.frame.maxY + labelsVMargin,
             width: enLabelSize.width,
             height: enLabelSize.height
         )
@@ -87,30 +87,30 @@ class ConnectionStatusView: UIView
             _connectivityStatus = newStatus
             
             switch (_connectivityStatus) {
-            case .Disconnected:
+            case .disconnected:
                 _japaneseLabel.text = "非直結"
-                _japaneseLabel.textColor = UIColor.redColor()
+                _japaneseLabel.textColor = UIColor.red
                 
                 _englishLabel.text = "offline"
-                _englishLabel.textColor = UIColor.redColor()
-            case .Connecting:
+                _englishLabel.textColor = UIColor.red
+            case .connecting:
                 _japaneseLabel.text = "接続中"
-                _japaneseLabel.textColor = UIColor.yellowColor()
+                _japaneseLabel.textColor = UIColor.yellow
                 
                 _englishLabel.text = "connecting..."
-                _englishLabel.textColor = UIColor.yellowColor()
-            case .Connected:
+                _englishLabel.textColor = UIColor.yellow
+            case .connected:
                 _japaneseLabel.text = "直結"
-                _japaneseLabel.textColor = UIColor.greenColor()
+                _japaneseLabel.textColor = UIColor.green
                 
                 _englishLabel.text = "online"
-                _englishLabel.textColor = UIColor.greenColor()
-            case .Error:
+                _englishLabel.textColor = UIColor.green
+            case .error:
                 _japaneseLabel.text = "過失"
-                _japaneseLabel.textColor = UIColor.redColor()
+                _japaneseLabel.textColor = UIColor.red
                 
                 _englishLabel.text = "error"
-                _englishLabel.textColor = UIColor.redColor()
+                _englishLabel.textColor = UIColor.red
             }
             
             self.setNeedsLayout()

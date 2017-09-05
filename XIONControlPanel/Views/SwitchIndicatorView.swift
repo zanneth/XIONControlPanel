@@ -10,22 +10,22 @@ import UIKit
 
 class SwitchIndicatorView: UIView
 {
-    private var _status:            Bool = false
-    private var _foregroundColor:   UIColor = UIColor.whiteColor()
-    private var _outerCircleLayer:  CAShapeLayer = CAShapeLayer()
-    private var _offSymbolLayer:    CAShapeLayer = CAShapeLayer()
-    private var _onSymbolLayer:     CAShapeLayer = CAShapeLayer()
+    fileprivate var _status:            Bool = false
+    fileprivate var _foregroundColor:   UIColor = UIColor.white
+    fileprivate var _outerCircleLayer:  CAShapeLayer = CAShapeLayer()
+    fileprivate var _offSymbolLayer:    CAShapeLayer = CAShapeLayer()
+    fileprivate var _onSymbolLayer:     CAShapeLayer = CAShapeLayer()
     
-    static private var lineWidth: CGFloat = 2.0
+    static fileprivate var lineWidth: CGFloat = 2.0
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         
-        _outerCircleLayer.fillColor = UIColor.clearColor().CGColor
+        _outerCircleLayer.fillColor = UIColor.clear.cgColor
         _outerCircleLayer.lineWidth = SwitchIndicatorView.lineWidth
         
-        _offSymbolLayer.fillColor = UIColor.clearColor().CGColor
+        _offSymbolLayer.fillColor = UIColor.clear.cgColor
         _offSymbolLayer.lineWidth = SwitchIndicatorView.lineWidth
         
         self.layer.addSublayer(_outerCircleLayer)
@@ -33,7 +33,7 @@ class SwitchIndicatorView: UIView
         self.layer.addSublayer(_onSymbolLayer)
         
         self.status = false
-        self.foregroundColor = UIColor.whiteColor()
+        self.foregroundColor = UIColor.white
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -52,7 +52,7 @@ class SwitchIndicatorView: UIView
         _offSymbolLayer.frame = bounds
         _onSymbolLayer.frame = bounds
         
-        _outerCircleLayer.path = CGPathCreateWithEllipseInRect(bounds, nil)
+        _outerCircleLayer.path = CGPath(ellipseIn: bounds, transform: nil)
         
         let innerSize = CGSize(width: rint(bounds.size.width / 2.0), height: rint(bounds.size.height / 2.0))
         let innerBounds = CGRect(
@@ -61,7 +61,7 @@ class SwitchIndicatorView: UIView
             width: innerSize.width,
             height: innerSize.height
         )
-        _offSymbolLayer.path = CGPathCreateWithEllipseInRect(innerBounds, nil)
+        _offSymbolLayer.path = CGPath(ellipseIn: innerBounds, transform: nil)
         
         let onSymbolSize = CGSize(width: lineWidth, height: innerSize.height)
         let onSymbolRect = CGRect(
@@ -70,7 +70,7 @@ class SwitchIndicatorView: UIView
             width: onSymbolSize.width,
             height: onSymbolSize.height
         )
-        _onSymbolLayer.path = CGPathCreateWithRect(onSymbolRect, nil)
+        _onSymbolLayer.path = CGPath(rect: onSymbolRect, transform: nil)
     }
     
     // MARK: API
@@ -85,8 +85,8 @@ class SwitchIndicatorView: UIView
         set(status)
         {
             _status = status
-            _offSymbolLayer.hidden = _status
-            _onSymbolLayer.hidden = !_status
+            _offSymbolLayer.isHidden = _status
+            _onSymbolLayer.isHidden = !_status
         }
     }
     
@@ -100,9 +100,9 @@ class SwitchIndicatorView: UIView
         set(color)
         {
             _foregroundColor = color
-            _outerCircleLayer.strokeColor = _foregroundColor.CGColor
-            _offSymbolLayer.strokeColor = _foregroundColor.CGColor
-            _onSymbolLayer.fillColor = _foregroundColor.CGColor
+            _outerCircleLayer.strokeColor = _foregroundColor.cgColor
+            _offSymbolLayer.strokeColor = _foregroundColor.cgColor
+            _onSymbolLayer.fillColor = _foregroundColor.cgColor
         }
     }
 }
