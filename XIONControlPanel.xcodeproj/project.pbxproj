@@ -424,10 +424,6 @@
 				DEVELOPMENT_TEAM = FZ6BMA5HA9;
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
@@ -447,10 +443,6 @@
 				DEVELOPMENT_TEAM = FZ6BMA5HA9;
 				INFOPLIST_FILE = "$(SRCROOT)/XIONControlPanel/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks/Swift",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.xionsf.XIONControlPanel;
 				PRODUCT_NAME = XION;
 				PROVISIONING_PROFILE = "";
